@@ -8,5 +8,8 @@ namespace PPAI_Implementacion.Clases
 {
     class Usuario
     {
+        public string Clave { get; set; }
+        public string NombreUsuario { get; set; }
+        public bool Habilitado { get; set; }
     }
 }

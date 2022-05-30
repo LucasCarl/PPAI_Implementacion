@@ -11,7 +11,7 @@ namespace PPAI_Implementacion.Clases
         public string Nombre { get; set; }
         public string Domicilio { get; set; }
         public PersonalCientifico ResponsableCyT { get; set; }
-
+        public List<CentroDeInvestigacion> centrosDeInvestigacion { get; set; }
 
     }
 }

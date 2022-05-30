@@ -8,5 +8,8 @@ namespace PPAI_Implementacion.Clases
 {
     class TipoRecursoTecnologico
     {
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public List<Caracteristica> caracteristicas { get; set; }
     }
 }

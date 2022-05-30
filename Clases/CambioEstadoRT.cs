@@ -12,6 +12,5 @@ namespace PPAI_Implementacion.Clases
         public DateTime FechaHoraHasta { get; set; }
         public Estado Estado { get; set; }
 
-
     }
 }

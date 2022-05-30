@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PPAI_Implementacion
+namespace PPAI_Implementacion.Interfaz
 {
-    public partial class Form1 : Form
+    public partial class MenuInicial : Form
     {
-        public Form1()
+        public MenuInicial()
         {
             InitializeComponent();
         }

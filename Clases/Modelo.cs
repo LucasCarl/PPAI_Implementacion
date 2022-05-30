@@ -8,5 +8,6 @@ namespace PPAI_Implementacion.Clases
 {
     class Modelo
     {
+        public string Nombre { get; set; }
     }
 }

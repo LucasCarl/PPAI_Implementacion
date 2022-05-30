@@ -10,5 +10,6 @@ namespace PPAI_Implementacion.Clases
     {
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
     }
 }

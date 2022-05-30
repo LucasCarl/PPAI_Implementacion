@@ -11,7 +11,7 @@ namespace PPAI_Implementacion.Clases
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
         public PersonalCientifico PersonalCientifico { get; set; }
-        private List<RecursoTecnologico> recursos;
+        public List<RecursoTecnologico> recursos { get; set; }
 
     }
 }

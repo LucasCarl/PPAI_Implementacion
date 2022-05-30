@@ -8,5 +8,7 @@ namespace PPAI_Implementacion.Clases
 {
     class Marca
     {
+        public string Nombre { get; set; }
+        public List<Modelo> modelos { get; set; }
     }
 }
