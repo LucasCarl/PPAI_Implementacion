@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace PPAI_Implementacion.Interfaz
 {
-    public partial class MenuInicial : Form
+    public partial class PantallaReservaTurno : Form
     {
-        public MenuInicial()
+        public PantallaReservaTurno()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PantallaReservaTurno pantallaReservaTurno = new PantallaReservaTurno();
-            pantallaReservaTurno.ShowDialog();
         }
     }
 }
