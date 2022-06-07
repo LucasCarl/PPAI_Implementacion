@@ -8,11 +8,20 @@ namespace PPAI_Implementacion.Clases
 {
     class Estado
     {
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string Ambito { get; set; }
-        public bool EsReservable { get; set; }
-        public bool EsCancelable { get; set; }
+        private string nombre;
+        private string descripcion;
+        private string ambito;
+        private bool esReservable;
+        private bool esCancelable;
+
+        public Estado(string nom, string desc, string amb, bool reser, bool canc)
+        {
+            nombre = nom;
+            descripcion = desc;
+            ambito = amb;
+            esReservable = reser;
+            esCancelable = canc;
+        }
 
     }
 }

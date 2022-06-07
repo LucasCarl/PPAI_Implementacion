@@ -8,10 +8,10 @@ namespace PPAI_Implementacion.Clases
 {
     class Turno
     {
-        public DateTime FechaGeneracion { get; set; }
-        public string DiaSemana { get; set; }
-        public DateTime FechaHoraInicio { get; set; }
-        public DateTime FechaHoraFin { get; set; }
-        public List<CambioEstadoTurno> CambioEstadoTurno { get; set; }
+        private DateTime fechaGeneracion;
+        private string diaSemana;
+        private DateTime fechaHoraInicio;
+        private DateTime fechaHoraFin;
+        private List<CambioEstadoTurno> cambioEstadoTurno;
     }
 }

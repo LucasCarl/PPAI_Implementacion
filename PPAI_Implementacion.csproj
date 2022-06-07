@@ -47,18 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\AsignacionCientificoDelCI.cs" />
-    <Compile Include="Clases\AsignacionDirectorCI.cs" />
-    <Compile Include="Clases\AsignacionResponsableTecnicoRT.cs" />
     <Compile Include="Clases\CambioEstadoRT.cs" />
     <Compile Include="Clases\CambioEstadoTurno.cs" />
     <Compile Include="Clases\Caracteristica.cs" />
     <Compile Include="Clases\CaracteristicaRecurso.cs" />
     <Compile Include="Clases\CentroDeInvestigacion.cs" />
     <Compile Include="Clases\Estado.cs" />
-    <Compile Include="Clases\ExtensionMantenimiento.cs" />
-    <Compile Include="Clases\Facultad.cs" />
     <Compile Include="Clases\HorarioRT.cs" />
-    <Compile Include="Clases\Mantenimiento.cs" />
     <Compile Include="Clases\Marca.cs" />
     <Compile Include="Clases\Modelo.cs" />
     <Compile Include="Clases\PersonalCientifico.cs" />

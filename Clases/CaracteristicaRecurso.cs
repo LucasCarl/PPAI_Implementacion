@@ -8,8 +8,23 @@ namespace PPAI_Implementacion.Clases
 {
     class CaracteristicaRecurso
     {
-        public Caracteristica caracteristica { get; set; }
-        public float Valor { get; set; }
+        private Caracteristica caracteristica;
+        private float valor;
 
+        public CaracteristicaRecurso(Caracteristica caract, float val)
+        {
+            caracteristica = caract;
+            valor = val;
+        }
+
+        public void SetValor(float val)
+        {
+            valor = val;
+        }
+
+        public float GetValor()
+        {
+            return valor;
+        }
     }
 }

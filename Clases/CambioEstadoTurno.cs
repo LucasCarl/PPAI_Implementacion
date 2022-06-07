@@ -8,9 +8,14 @@ namespace PPAI_Implementacion.Clases
 {
     class CambioEstadoTurno
     {
-        public DateTime FechaHoraDesde { get; set; }
-        public DateTime FechaHoraHasta { get; set; }
-        public Estado Estado { get; set; }
+        private DateTime fechaHoraDesde;
+        private DateTime fechaHoraHasta;
+        private Estado estado;
 
+        public CambioEstadoTurno(DateTime desde, Estado est)
+        {
+            fechaHoraDesde = desde;
+            estado = est;
+        }
     }
 }

@@ -8,6 +8,21 @@ namespace PPAI_Implementacion.Clases
 {
     class Modelo
     {
-        public string Nombre { get; set; }
+        private string nombre;
+
+        public Modelo(string nom)
+        {
+            nombre = nom;
+        }
+
+        public void SetNombre(string nom)
+        {
+            nombre = nom;
+        }
+
+        public string GetNombre()
+        {
+            return nombre;
+        }
     }
 }

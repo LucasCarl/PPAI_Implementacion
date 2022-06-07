@@ -8,9 +8,11 @@ namespace PPAI_Implementacion.Clases
 {
     class HorarioRT
     {
-        public string DiaSemana { get; set; }
-        public DateTime HoraDesde { get; set; }
-        public DateTime HoraHasta { get; set; }
+        private string diaSemana;
+        private DateTime horaDesde;
+        private DateTime horaHasta;
+        private DateTime vigenciaDesde;
+        private DateTime vigenciaHasta;
 
     }
 }

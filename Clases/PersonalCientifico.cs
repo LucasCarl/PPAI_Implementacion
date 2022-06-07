@@ -8,14 +8,13 @@ namespace PPAI_Implementacion.Clases
 {
     class PersonalCientifico
     {
-        #region Variables
-        public int Legajo { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public int numeroDocumento { get; set; }
-        public string CorreoElectronicoInstitucional { get; set; }
-        public string CorreoElectronicoPersonal { get; set; }
-        public string TelefonoCelular { get; set; }
-        #endregion
+        private int legajo;
+        private string nombre;
+        private string apellido;
+        private int numeroDocumento;
+        private string correoElectronicoInstitucional;
+        private string correoElectronicoPersonal;
+        private string telefonoCelular;
+        private Usuario usuario;
     }
 }

@@ -8,8 +8,33 @@ namespace PPAI_Implementacion.Clases
 {
     class Caracteristica
     {
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        private string nombre;
+        private string descripcion;
 
+        public Caracteristica(string nom, string desc)
+        {
+            nombre = nom;
+            descripcion = desc;
+        }
+
+        public void SetNombre(string nom)
+        {
+            nombre = nom;
+        }
+
+        public string GetNombre()
+        {
+            return nombre;
+        }
+
+        public void SetDescripcion(string desc)
+        {
+            descripcion = desc;
+        }
+
+        public string GetDescripcion()
+        {
+            return descripcion;
+        }
     }
 }

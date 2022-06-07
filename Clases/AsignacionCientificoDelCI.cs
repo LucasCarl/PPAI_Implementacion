@@ -8,10 +8,15 @@ namespace PPAI_Implementacion.Clases
 {
     class AsignacionCientificoDelCI
     {
-        public DateTime FechaDesde { get; set; }
-        public DateTime FechaHasta { get; set; }
-        public PersonalCientifico PersonalCientifico { get; set; }
-        public List<Turno> turnos { get; set; }
+        private DateTime fechaDesde;
+        private DateTime fechaHasta;
+        private PersonalCientifico personalCientifico;
+        private List<Turno> turnos;
 
+        public AsignacionCientificoDelCI(DateTime desde, PersonalCientifico cientifico)
+        {
+            fechaDesde = desde;
+            personalCientifico = cientifico;
+        }
     }
 }

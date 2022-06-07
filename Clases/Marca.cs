@@ -8,7 +8,25 @@ namespace PPAI_Implementacion.Clases
 {
     class Marca
     {
-        public string Nombre { get; set; }
-        public List<Modelo> modelos { get; set; }
+        private string nombre;
+        private List<Modelo> modelos;
+
+        public Marca(string nom, List<Modelo> listaModelos)
+        {
+            nombre = nom;
+            modelos = listaModelos;
+        }
+
+        public void SetNombre(string nom)
+        {
+            nombre = nom;
+        }
+
+        public string GetNombre()
+        {
+            return nombre;
+        }
+
+        //mostrarmodelos
     }
 }
