@@ -1,7 +1,7 @@
 ﻿
 namespace PPAI_Implementacion.Interfaz
 {
-    partial class PantallaReservaTurno
+    partial class PantallaReserva
     {
         /// <summary>
         /// Required designer variable.
@@ -46,27 +46,27 @@ namespace PPAI_Implementacion.Interfaz
             this.dgvHorasTurnos = new System.Windows.Forms.DataGridView();
             this.cldDiasTurnos = new System.Windows.Forms.MonthCalendar();
             this.gbxConfirmacion = new System.Windows.Forms.GroupBox();
+            this.btnCancelarReserva = new System.Windows.Forms.Button();
+            this.btnConfirmarReserva = new System.Windows.Forms.Button();
+            this.lblDatosRecurso = new System.Windows.Forms.Label();
+            this.lblDatosTurno = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.lblDatosHoraTurno = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.lblDatosFechaTurno = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.lblDatosModelo = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.lblDatosMarca = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.lblDatosCentroInv = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.lblDatosTipoRecurso = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblDatosNroInv = new System.Windows.Forms.Label();
             this.gbxNotificacion = new System.Windows.Forms.GroupBox();
             this.cbxWhatsapp = new System.Windows.Forms.CheckBox();
             this.cbxEmail = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lblDatosNroInv = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.lblDatosTipoRecurso = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.lblDatosCentroInv = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.lblDatosMarca = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.lblDatosModelo = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.lblDatosFechaTurno = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.lblDatosHoraTurno = new System.Windows.Forms.Label();
-            this.lblDatosTurno = new System.Windows.Forms.Label();
-            this.lblDatosRecurso = new System.Windows.Forms.Label();
-            this.btnConfirmarReserva = new System.Windows.Forms.Button();
-            this.btnCancelarReserva = new System.Windows.Forms.Button();
             this.gbxTipoRecurso.SuspendLayout();
             this.gbxRecurso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
@@ -78,6 +78,7 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // cbxTipoRecurso
             // 
+            this.cbxTipoRecurso.Enabled = false;
             this.cbxTipoRecurso.FormattingEnabled = true;
             this.cbxTipoRecurso.Location = new System.Drawing.Point(101, 25);
             this.cbxTipoRecurso.Name = "cbxTipoRecurso";
@@ -107,12 +108,14 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // btnTipoRecurso
             // 
+            this.btnTipoRecurso.Enabled = false;
             this.btnTipoRecurso.Location = new System.Drawing.Point(241, 23);
             this.btnTipoRecurso.Name = "btnTipoRecurso";
             this.btnTipoRecurso.Size = new System.Drawing.Size(124, 23);
             this.btnTipoRecurso.TabIndex = 2;
             this.btnTipoRecurso.Text = "Buscar Recursos Tipo";
             this.btnTipoRecurso.UseVisualStyleBackColor = true;
+            this.btnTipoRecurso.Click += new System.EventHandler(this.SeleccionTipoRecurso);
             // 
             // gbxRecurso
             // 
@@ -127,12 +130,14 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // btnRecurso
             // 
+            this.btnRecurso.Enabled = false;
             this.btnRecurso.Location = new System.Drawing.Point(8, 176);
             this.btnRecurso.Name = "btnRecurso";
             this.btnRecurso.Size = new System.Drawing.Size(119, 23);
             this.btnRecurso.TabIndex = 1;
             this.btnRecurso.Text = "Seleccionar Recurso";
             this.btnRecurso.UseVisualStyleBackColor = true;
+            this.btnRecurso.Click += new System.EventHandler(this.SeleccionarRT);
             // 
             // dgvRecursos
             // 
@@ -143,6 +148,7 @@ namespace PPAI_Implementacion.Interfaz
             this.Marca,
             this.Modelo,
             this.Estado});
+            this.dgvRecursos.Enabled = false;
             this.dgvRecursos.Location = new System.Drawing.Point(8, 19);
             this.dgvRecursos.Name = "dgvRecursos";
             this.dgvRecursos.Size = new System.Drawing.Size(543, 150);
@@ -187,16 +193,19 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // btnTurno
             // 
+            this.btnTurno.Enabled = false;
             this.btnTurno.Location = new System.Drawing.Point(442, 160);
             this.btnTurno.Name = "btnTurno";
             this.btnTurno.Size = new System.Drawing.Size(109, 24);
             this.btnTurno.TabIndex = 2;
             this.btnTurno.Text = "Seleccionar Turno";
             this.btnTurno.UseVisualStyleBackColor = true;
+            this.btnTurno.Click += new System.EventHandler(this.SeleccionarTurno);
             // 
             // dgvHorasTurnos
             // 
             this.dgvHorasTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHorasTurnos.Enabled = false;
             this.dgvHorasTurnos.Location = new System.Drawing.Point(278, 22);
             this.dgvHorasTurnos.Name = "dgvHorasTurnos";
             this.dgvHorasTurnos.Size = new System.Drawing.Size(158, 162);
@@ -205,6 +214,7 @@ namespace PPAI_Implementacion.Interfaz
             // cldDiasTurnos
             // 
             this.cldDiasTurnos.BackColor = System.Drawing.SystemColors.Window;
+            this.cldDiasTurnos.Enabled = false;
             this.cldDiasTurnos.Location = new System.Drawing.Point(9, 22);
             this.cldDiasTurnos.Name = "cldDiasTurnos";
             this.cldDiasTurnos.TabIndex = 0;
@@ -237,135 +247,48 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxConfirmacion.TabStop = false;
             this.gbxConfirmacion.Text = "Confirmacion Turno";
             // 
-            // gbxNotificacion
+            // btnCancelarReserva
             // 
-            this.gbxNotificacion.Controls.Add(this.cbxWhatsapp);
-            this.gbxNotificacion.Controls.Add(this.cbxEmail);
-            this.gbxNotificacion.Location = new System.Drawing.Point(19, 278);
-            this.gbxNotificacion.Name = "gbxNotificacion";
-            this.gbxNotificacion.Size = new System.Drawing.Size(200, 66);
-            this.gbxNotificacion.TabIndex = 2;
-            this.gbxNotificacion.TabStop = false;
-            this.gbxNotificacion.Text = "Notificacion: ";
+            this.btnCancelarReserva.Location = new System.Drawing.Point(19, 411);
+            this.btnCancelarReserva.Name = "btnCancelarReserva";
+            this.btnCancelarReserva.Size = new System.Drawing.Size(105, 23);
+            this.btnCancelarReserva.TabIndex = 20;
+            this.btnCancelarReserva.Text = "Cancelar Reserva";
+            this.btnCancelarReserva.UseVisualStyleBackColor = true;
+            this.btnCancelarReserva.Click += new System.EventHandler(this.CancelarReservaTurno);
             // 
-            // cbxWhatsapp
+            // btnConfirmarReserva
             // 
-            this.cbxWhatsapp.AutoSize = true;
-            this.cbxWhatsapp.Location = new System.Drawing.Point(6, 42);
-            this.cbxWhatsapp.Name = "cbxWhatsapp";
-            this.cbxWhatsapp.Size = new System.Drawing.Size(75, 17);
-            this.cbxWhatsapp.TabIndex = 1;
-            this.cbxWhatsapp.Text = "Whatsapp";
-            this.cbxWhatsapp.UseVisualStyleBackColor = true;
+            this.btnConfirmarReserva.Enabled = false;
+            this.btnConfirmarReserva.Location = new System.Drawing.Point(19, 370);
+            this.btnConfirmarReserva.Name = "btnConfirmarReserva";
+            this.btnConfirmarReserva.Size = new System.Drawing.Size(105, 23);
+            this.btnConfirmarReserva.TabIndex = 19;
+            this.btnConfirmarReserva.Text = "Confirmar Reserva";
+            this.btnConfirmarReserva.UseVisualStyleBackColor = true;
+            this.btnConfirmarReserva.Click += new System.EventHandler(this.ConfirmarReservaTurno);
             // 
-            // cbxEmail
+            // lblDatosRecurso
             // 
-            this.cbxEmail.AutoSize = true;
-            this.cbxEmail.Location = new System.Drawing.Point(6, 19);
-            this.cbxEmail.Name = "cbxEmail";
-            this.cbxEmail.Size = new System.Drawing.Size(55, 17);
-            this.cbxEmail.TabIndex = 0;
-            this.cbxEmail.Text = "E-Mail";
-            this.cbxEmail.UseVisualStyleBackColor = true;
+            this.lblDatosRecurso.AutoSize = true;
+            this.lblDatosRecurso.Location = new System.Drawing.Point(16, 33);
+            this.lblDatosRecurso.Name = "lblDatosRecurso";
+            this.lblDatosRecurso.Size = new System.Drawing.Size(81, 13);
+            this.lblDatosRecurso.TabIndex = 18;
+            this.lblDatosRecurso.Text = "Datos Recurso:";
             // 
-            // textBox1
+            // lblDatosTurno
             // 
-            this.textBox1.Location = new System.Drawing.Point(119, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
-            // 
-            // lblDatosNroInv
-            // 
-            this.lblDatosNroInv.AutoSize = true;
-            this.lblDatosNroInv.Location = new System.Drawing.Point(14, 51);
-            this.lblDatosNroInv.Name = "lblDatosNroInv";
-            this.lblDatosNroInv.Size = new System.Drawing.Size(74, 13);
-            this.lblDatosNroInv.TabIndex = 3;
-            this.lblDatosNroInv.Text = "Nro Inventario";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(119, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
-            // 
-            // lblDatosTipoRecurso
-            // 
-            this.lblDatosTipoRecurso.AutoSize = true;
-            this.lblDatosTipoRecurso.Location = new System.Drawing.Point(14, 77);
-            this.lblDatosTipoRecurso.Name = "lblDatosTipoRecurso";
-            this.lblDatosTipoRecurso.Size = new System.Drawing.Size(71, 13);
-            this.lblDatosTipoRecurso.TabIndex = 5;
-            this.lblDatosTipoRecurso.Text = "Tipo Recurso";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(119, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 8;
-            // 
-            // lblDatosCentroInv
-            // 
-            this.lblDatosCentroInv.AutoSize = true;
-            this.lblDatosCentroInv.Location = new System.Drawing.Point(14, 103);
-            this.lblDatosCentroInv.Name = "lblDatosCentroInv";
-            this.lblDatosCentroInv.Size = new System.Drawing.Size(104, 13);
-            this.lblDatosCentroInv.TabIndex = 7;
-            this.lblDatosCentroInv.Text = "Centro Investigacion";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(119, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 10;
-            // 
-            // lblDatosMarca
-            // 
-            this.lblDatosMarca.AutoSize = true;
-            this.lblDatosMarca.Location = new System.Drawing.Point(14, 129);
-            this.lblDatosMarca.Name = "lblDatosMarca";
-            this.lblDatosMarca.Size = new System.Drawing.Size(37, 13);
-            this.lblDatosMarca.TabIndex = 9;
-            this.lblDatosMarca.Text = "Marca";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(119, 152);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 12;
-            // 
-            // lblDatosModelo
-            // 
-            this.lblDatosModelo.AutoSize = true;
-            this.lblDatosModelo.Location = new System.Drawing.Point(14, 155);
-            this.lblDatosModelo.Name = "lblDatosModelo";
-            this.lblDatosModelo.Size = new System.Drawing.Size(42, 13);
-            this.lblDatosModelo.TabIndex = 11;
-            this.lblDatosModelo.Text = "Modelo";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(119, 207);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 14;
-            // 
-            // lblDatosFechaTurno
-            // 
-            this.lblDatosFechaTurno.AutoSize = true;
-            this.lblDatosFechaTurno.Location = new System.Drawing.Point(14, 210);
-            this.lblDatosFechaTurno.Name = "lblDatosFechaTurno";
-            this.lblDatosFechaTurno.Size = new System.Drawing.Size(68, 13);
-            this.lblDatosFechaTurno.TabIndex = 13;
-            this.lblDatosFechaTurno.Text = "Fecha Turno";
+            this.lblDatosTurno.AutoSize = true;
+            this.lblDatosTurno.Location = new System.Drawing.Point(16, 186);
+            this.lblDatosTurno.Name = "lblDatosTurno";
+            this.lblDatosTurno.Size = new System.Drawing.Size(69, 13);
+            this.lblDatosTurno.TabIndex = 17;
+            this.lblDatosTurno.Text = "Datos Turno:";
             // 
             // textBox7
             // 
+            this.textBox7.Enabled = false;
             this.textBox7.Location = new System.Drawing.Point(119, 233);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(100, 20);
@@ -380,43 +303,142 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosHoraTurno.TabIndex = 15;
             this.lblDatosHoraTurno.Text = "Hora Turno";
             // 
-            // lblDatosTurno
+            // textBox6
             // 
-            this.lblDatosTurno.AutoSize = true;
-            this.lblDatosTurno.Location = new System.Drawing.Point(16, 186);
-            this.lblDatosTurno.Name = "lblDatosTurno";
-            this.lblDatosTurno.Size = new System.Drawing.Size(69, 13);
-            this.lblDatosTurno.TabIndex = 17;
-            this.lblDatosTurno.Text = "Datos Turno:";
+            this.textBox6.Enabled = false;
+            this.textBox6.Location = new System.Drawing.Point(119, 207);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 14;
             // 
-            // lblDatosRecurso
+            // lblDatosFechaTurno
             // 
-            this.lblDatosRecurso.AutoSize = true;
-            this.lblDatosRecurso.Location = new System.Drawing.Point(16, 33);
-            this.lblDatosRecurso.Name = "lblDatosRecurso";
-            this.lblDatosRecurso.Size = new System.Drawing.Size(81, 13);
-            this.lblDatosRecurso.TabIndex = 18;
-            this.lblDatosRecurso.Text = "Datos Recurso:";
+            this.lblDatosFechaTurno.AutoSize = true;
+            this.lblDatosFechaTurno.Location = new System.Drawing.Point(14, 210);
+            this.lblDatosFechaTurno.Name = "lblDatosFechaTurno";
+            this.lblDatosFechaTurno.Size = new System.Drawing.Size(68, 13);
+            this.lblDatosFechaTurno.TabIndex = 13;
+            this.lblDatosFechaTurno.Text = "Fecha Turno";
             // 
-            // btnConfirmarReserva
+            // textBox5
             // 
-            this.btnConfirmarReserva.Location = new System.Drawing.Point(19, 370);
-            this.btnConfirmarReserva.Name = "btnConfirmarReserva";
-            this.btnConfirmarReserva.Size = new System.Drawing.Size(105, 23);
-            this.btnConfirmarReserva.TabIndex = 19;
-            this.btnConfirmarReserva.Text = "Confirmar Reserva";
-            this.btnConfirmarReserva.UseVisualStyleBackColor = true;
+            this.textBox5.Enabled = false;
+            this.textBox5.Location = new System.Drawing.Point(119, 152);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 12;
             // 
-            // btnCancelarReserva
+            // lblDatosModelo
             // 
-            this.btnCancelarReserva.Location = new System.Drawing.Point(19, 411);
-            this.btnCancelarReserva.Name = "btnCancelarReserva";
-            this.btnCancelarReserva.Size = new System.Drawing.Size(105, 23);
-            this.btnCancelarReserva.TabIndex = 20;
-            this.btnCancelarReserva.Text = "Cancelar Reserva";
-            this.btnCancelarReserva.UseVisualStyleBackColor = true;
+            this.lblDatosModelo.AutoSize = true;
+            this.lblDatosModelo.Location = new System.Drawing.Point(14, 155);
+            this.lblDatosModelo.Name = "lblDatosModelo";
+            this.lblDatosModelo.Size = new System.Drawing.Size(42, 13);
+            this.lblDatosModelo.TabIndex = 11;
+            this.lblDatosModelo.Text = "Modelo";
             // 
-            // PantallaReservaTurno
+            // textBox4
+            // 
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(119, 126);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 10;
+            // 
+            // lblDatosMarca
+            // 
+            this.lblDatosMarca.AutoSize = true;
+            this.lblDatosMarca.Location = new System.Drawing.Point(14, 129);
+            this.lblDatosMarca.Name = "lblDatosMarca";
+            this.lblDatosMarca.Size = new System.Drawing.Size(37, 13);
+            this.lblDatosMarca.TabIndex = 9;
+            this.lblDatosMarca.Text = "Marca";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(119, 100);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 8;
+            // 
+            // lblDatosCentroInv
+            // 
+            this.lblDatosCentroInv.AutoSize = true;
+            this.lblDatosCentroInv.Location = new System.Drawing.Point(14, 103);
+            this.lblDatosCentroInv.Name = "lblDatosCentroInv";
+            this.lblDatosCentroInv.Size = new System.Drawing.Size(104, 13);
+            this.lblDatosCentroInv.TabIndex = 7;
+            this.lblDatosCentroInv.Text = "Centro Investigacion";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(119, 74);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 6;
+            // 
+            // lblDatosTipoRecurso
+            // 
+            this.lblDatosTipoRecurso.AutoSize = true;
+            this.lblDatosTipoRecurso.Location = new System.Drawing.Point(14, 77);
+            this.lblDatosTipoRecurso.Name = "lblDatosTipoRecurso";
+            this.lblDatosTipoRecurso.Size = new System.Drawing.Size(71, 13);
+            this.lblDatosTipoRecurso.TabIndex = 5;
+            this.lblDatosTipoRecurso.Text = "Tipo Recurso";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(119, 48);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 4;
+            // 
+            // lblDatosNroInv
+            // 
+            this.lblDatosNroInv.AutoSize = true;
+            this.lblDatosNroInv.Location = new System.Drawing.Point(14, 51);
+            this.lblDatosNroInv.Name = "lblDatosNroInv";
+            this.lblDatosNroInv.Size = new System.Drawing.Size(74, 13);
+            this.lblDatosNroInv.TabIndex = 3;
+            this.lblDatosNroInv.Text = "Nro Inventario";
+            // 
+            // gbxNotificacion
+            // 
+            this.gbxNotificacion.Controls.Add(this.cbxWhatsapp);
+            this.gbxNotificacion.Controls.Add(this.cbxEmail);
+            this.gbxNotificacion.Location = new System.Drawing.Point(19, 278);
+            this.gbxNotificacion.Name = "gbxNotificacion";
+            this.gbxNotificacion.Size = new System.Drawing.Size(200, 66);
+            this.gbxNotificacion.TabIndex = 2;
+            this.gbxNotificacion.TabStop = false;
+            this.gbxNotificacion.Text = "Notificacion: ";
+            // 
+            // cbxWhatsapp
+            // 
+            this.cbxWhatsapp.AutoSize = true;
+            this.cbxWhatsapp.Enabled = false;
+            this.cbxWhatsapp.Location = new System.Drawing.Point(6, 42);
+            this.cbxWhatsapp.Name = "cbxWhatsapp";
+            this.cbxWhatsapp.Size = new System.Drawing.Size(75, 17);
+            this.cbxWhatsapp.TabIndex = 1;
+            this.cbxWhatsapp.Text = "Whatsapp";
+            this.cbxWhatsapp.UseVisualStyleBackColor = true;
+            // 
+            // cbxEmail
+            // 
+            this.cbxEmail.AutoSize = true;
+            this.cbxEmail.Enabled = false;
+            this.cbxEmail.Location = new System.Drawing.Point(6, 19);
+            this.cbxEmail.Name = "cbxEmail";
+            this.cbxEmail.Size = new System.Drawing.Size(55, 17);
+            this.cbxEmail.TabIndex = 0;
+            this.cbxEmail.Text = "E-Mail";
+            this.cbxEmail.UseVisualStyleBackColor = true;
+            // 
+            // PantallaReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -425,7 +447,7 @@ namespace PPAI_Implementacion.Interfaz
             this.Controls.Add(this.gbxTurno);
             this.Controls.Add(this.gbxRecurso);
             this.Controls.Add(this.gbxTipoRecurso);
-            this.Name = "PantallaReservaTurno";
+            this.Name = "PantallaReserva";
             this.Text = "PantallaReservaTurno";
             this.gbxTipoRecurso.ResumeLayout(false);
             this.gbxTipoRecurso.PerformLayout();

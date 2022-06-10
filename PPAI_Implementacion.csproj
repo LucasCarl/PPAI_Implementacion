@@ -61,25 +61,28 @@
     <Compile Include="Clases\TipoRecursoTecnologico.cs" />
     <Compile Include="Clases\Turno.cs" />
     <Compile Include="Clases\Usuario.cs" />
+    <Compile Include="Gestor\GestorTurnos.cs" />
     <Compile Include="Interfaz\MenuInicial.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaz\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaz\PantallaReservaTurno.cs">
+    <Compile Include="Interfaz\PantallaReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaz\PantallaReservaTurno.Designer.cs">
-      <DependentUpon>PantallaReservaTurno.cs</DependentUpon>
+    <Compile Include="Interfaz\PantallaReserva.Designer.cs">
+      <DependentUpon>PantallaReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObtencionDatos\RecursoTecnologicoDao.cs" />
+    <Compile Include="ObtencionDatos\TipoRecursoTecnologicoDao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaz\PantallaReservaTurno.resx">
-      <DependentUpon>PantallaReservaTurno.cs</DependentUpon>
+    <EmbeddedResource Include="Interfaz\PantallaReserva.resx">
+      <DependentUpon>PantallaReserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,8 +106,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gestor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

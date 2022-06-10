@@ -17,5 +17,12 @@ namespace PPAI_Implementacion.Clases
         private List<HorarioRT> disponibilidad;
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
+
+        public RecursoTecnologico(int nro, TipoRecursoTecnologico tipo, Modelo mod)
+        {
+            numeroRT = nro;
+            tipoRecurso = tipo;
+            modeloDelRT = mod;
+        }
     }
 }

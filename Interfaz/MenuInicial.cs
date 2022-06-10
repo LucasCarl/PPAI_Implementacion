@@ -19,8 +19,8 @@ namespace PPAI_Implementacion.Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PantallaReservaTurno pantallaReservaTurno = new PantallaReservaTurno();
-            pantallaReservaTurno.ShowDialog();
+            PantallaReserva pantallaReservaTurno = new PantallaReserva();
+            pantallaReservaTurno.HabilitarPantalla();
         }
     }
 }

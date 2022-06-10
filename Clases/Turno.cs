@@ -13,5 +13,11 @@ namespace PPAI_Implementacion.Clases
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFin;
         private List<CambioEstadoTurno> cambioEstadoTurno;
+
+        public Turno(DateTime desde, DateTime hasta)
+        {
+            fechaHoraInicio = desde;
+            fechaHoraFin = hasta;
+        }
     }
 }
