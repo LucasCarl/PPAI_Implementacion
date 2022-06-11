@@ -10,18 +10,11 @@ namespace PPAI_Implementacion.Clases
     {
         private string nombre;
         private string descripcion;
-        //private List<Caracteristica> caracteristicas;
 
         public TipoRecursoTecnologico(string nom, string desc)
         {
             nombre = nom;
             descripcion = desc;
-            //caracteristicas = listaCaract;
-        }
-
-        public void SetNombre(string nom)
-        {
-            nombre = nom;
         }
 
         public string GetNombre()
@@ -29,14 +22,9 @@ namespace PPAI_Implementacion.Clases
             return nombre;
         }
 
-        public void SetDescripcion(string desc)
+        public void MostrarTipoRT()
         {
-            descripcion = desc;
-        }
 
-        public string GetDescripcion()
-        {
-            return descripcion;
         }
     }
 }

@@ -15,14 +15,14 @@ namespace PPAI_Implementacion.Clases
             nombre = nom;
         }
 
-        public void SetNombre(string nom)
-        {
-            nombre = nom;
-        }
-
         public string GetNombre()
         {
             return nombre;
+        }
+
+        public string MostrarModelo()
+        {
+            return GetNombre();
         }
     }
 }

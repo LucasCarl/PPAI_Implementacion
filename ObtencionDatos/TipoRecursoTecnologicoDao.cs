@@ -14,19 +14,6 @@ namespace PPAI_Implementacion.ObtencionDatos
 
         public TipoRecursoTecnologicoDao()
         {
-            EncontrarTiposRecursos();
-        }
-
-        public static TipoRecursoTecnologicoDao Instancia()
-        {
-            if (instancia == null)
-                instancia = new TipoRecursoTecnologicoDao();
-
-            return instancia;
-        }
-
-        public void EncontrarTiposRecursos()
-        {
             List<TipoRecursoTecnologico> listaTipos = new List<TipoRecursoTecnologico>();
             listaTipos.Add(new TipoRecursoTecnologico("Microscopio", "Ver moleculas"));
             listaTipos.Add(new TipoRecursoTecnologico("Balanza", "Medir peso"));
@@ -35,6 +22,14 @@ namespace PPAI_Implementacion.ObtencionDatos
             listaTipos.Add(new TipoRecursoTecnologico("Pipetas", "Almacenar liquidos"));
 
             tiposRecurso = listaTipos;
+        }
+
+        public static TipoRecursoTecnologicoDao Instancia()
+        {
+            if (instancia == null)
+                instancia = new TipoRecursoTecnologicoDao();
+
+            return instancia;
         }
 
         public List<string> ObtenerNombresTRT()

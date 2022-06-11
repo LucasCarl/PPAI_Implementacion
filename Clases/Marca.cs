@@ -17,16 +17,14 @@ namespace PPAI_Implementacion.Clases
             modelos = listaModelos;
         }
 
-        public void SetNombre(string nom)
-        {
-            nombre = nom;
-        }
-
         public string GetNombre()
         {
             return nombre;
         }
 
-        //mostrarmodelos
+        public void MostrarMarca()
+        {
+
+        }
     }
 }

@@ -23,5 +23,30 @@ namespace PPAI_Implementacion.Clases
             esCancelable = canc;
         }
 
+        public string GetNombre()
+        {
+            return nombre;
+        }
+
+        public bool EsReservable()
+        {
+            return esReservable;
+        }
+
+        public void MostrarEstado()
+        {
+
+        }
+
+        public bool EsAmbitoTurno()
+        {
+            return ambito == "Turno";
+        }
+
+        public bool EsReservado()
+        {
+            return true;
+        }
+
     }
 }

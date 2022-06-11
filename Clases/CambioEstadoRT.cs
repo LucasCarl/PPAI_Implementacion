@@ -27,5 +27,10 @@ namespace PPAI_Implementacion.Clases
         {
             fechaHoraHasta = hora;
         }
+
+        public string GetEstado()
+        {
+            return estado.GetNombre();
+        }
     }
 }

@@ -8,13 +8,13 @@ namespace PPAI_Implementacion.Clases
 {
     class Sesion
     {
-        private DateTime fechaHoraDesde;
-        private DateTime fechaHoraHasta;
+        private DateTime fechaHoraInicio;
+        private DateTime fechaHoraFin;
         private Usuario usuario;
 
         public Sesion(Usuario usu)
         {
-            fechaHoraDesde = DateTime.Now;
+            fechaHoraInicio = DateTime.Now;
             usuario = usu;
         }
 

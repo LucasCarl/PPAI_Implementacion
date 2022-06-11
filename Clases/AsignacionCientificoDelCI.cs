@@ -24,9 +24,14 @@ namespace PPAI_Implementacion.Clases
             return true;
         }
 
-        public void AgregarNuevoTurno(Turno turnoNuevo)
+        public void SetTurno(Turno turnoNuevo)
         {
             turnos.Add(turnoNuevo);
+        }
+
+        public string ObtenerMail()
+        {
+            return personalCientifico.ObtenerMail();
         }
     }
 }

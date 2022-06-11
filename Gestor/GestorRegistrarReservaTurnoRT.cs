@@ -9,13 +9,9 @@ using PPAI_Implementacion.Interfaz;
 
 namespace PPAI_Implementacion.Gestor
 {
-    class GestorTurnos
+    class GestorRegistrarReservaTurnoRT
     {
-        private PantallaReserva pantallaReserva;
-        /*
-        private TipoRecursoTecnologico tipoSeleccionado;
-        private Turno turnoSeleccionado;
-        */
+        private PantallaRegistrarReservaTurnoRT pantallaReserva;
         private string tipoSelect;
         private List<RecursoTecnologico> listaRecursos;
         private RecursoTecnologico recursoSeleccionado;
@@ -23,35 +19,36 @@ namespace PPAI_Implementacion.Gestor
         private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
         private RecursoTecnologicoDao recursoTecnologicoDao;
         private TurnoDao turnoDao;
+        private EstadosDao estadosDao;
 
-        public GestorTurnos(PantallaReserva pantalla)
+        public GestorRegistrarReservaTurnoRT(PantallaRegistrarReservaTurnoRT pantalla)
         {
             pantallaReserva = pantalla;
             tipoRecursoTecnologicoDao = TipoRecursoTecnologicoDao.Instancia();
             recursoTecnologicoDao = RecursoTecnologicoDao.Instancia();
             turnoDao = TurnoDao.Instancia();
+            estadosDao = EstadosDao.Instancia();
         }
 
-        public void NuevaReservaTurno()
+        public void RegistrarReservaTurnoRT()
         {
-            List<string> listaRecursos = ObtenerTipoRecurso();
+            List<string> listaRecursos = BuuscarTiposRT();
             listaRecursos.Insert(0, "TODOS");
-            pantallaReserva.PedirSeleccionTRT(listaRecursos);
+            pantallaReserva.SolicitarSeleccionTipoRT(listaRecursos);
         }
 
-        public List<string> ObtenerTipoRecurso()
+        public List<string> BuuscarTiposRT()
         {
             return tipoRecursoTecnologicoDao.ObtenerNombresTRT();
         }
 
-        public void TomarSeleccionTRT(string seleccionado)
+        public void TomarSeleccionTipoRT(string seleccionado)
         {
-            //tipoSeleccionado = tipoRecursoTecnologicoDao.ObtenerTipoRecurso(seleccionado);
             tipoSelect = seleccionado;
-            BuscarRT();
+            ObtenerRTActivoYDelTipo();
         }
 
-        public void BuscarRT()
+        public void ObtenerRTActivoYDelTipo()
         {
             //Obtener todos los recursos
             List<RecursoTecnologico> listaTodosRecursos = recursoTecnologicoDao.ObtenerRecursos();
@@ -61,21 +58,21 @@ namespace PPAI_Implementacion.Gestor
             listaRecursos = new List<RecursoTecnologico>();
             foreach (RecursoTecnologico recurso in listaTodosRecursos)
             {
-                bool condicionTipo = (tipoSelect == "TODOS" || recurso.SosTipo(tipoRecursoTecnologicoDao.ObtenerTipoRecurso(tipoSelect)));
-                bool condicionActivo = recurso.SosActivo();
+                bool condicionTipo = (tipoSelect == "TODOS" || recurso.EsDeTipoRTSeleccionado(tipoRecursoTecnologicoDao.ObtenerTipoRecurso(tipoSelect)));
+                bool condicionActivo = recurso.EsActivo();
 
                 if(condicionTipo && condicionActivo)
                 {
                     listaRecursos.Add(recurso);
-                    listaDatosRecursos.Add(recurso.MostrarDatos());
+                    listaDatosRecursos.Add(recurso.MostrarDatosRT());
                 }
             }
 
-            AgruparPorCI();
-            pantallaReserva.PedirSeleccionRT(listaDatosRecursos);
+            OrdenarYAgruparRTPorCI();
+            pantallaReserva.SolicitarSeleccionRT(listaDatosRecursos);
         }
 
-        public void AgruparPorCI()
+        public void OrdenarYAgruparRTPorCI()
         {
             //Algo
         }
@@ -83,26 +80,31 @@ namespace PPAI_Implementacion.Gestor
         public void TomarSeleccionRT(int indexSeleccionado)
         {
             recursoSeleccionado = listaRecursos[indexSeleccionado];
-            VerificarCIDeCLogueado();
-            ObtenerTurnosReservables();
+            ObtenerCientificoLogueado();
+            ObtenerTurnosReservablesRTSeleccionado();
         }
 
-        public void VerificarCIDeCLogueado()
+        public void ObtenerCientificoLogueado()
         {
 
         }
 
-        public void ObtenerTurnosReservables()
+        public void ObtenerTurnosReservablesRTSeleccionado()
         {
-            DateTime hoy = GetFechaActual();
+            DateTime hoy = ObtenerFechaHoraActual();
             AgruparYOrdenarTurnos();
-            DisponibilidadPorFecha(hoy);
-            pantallaReserva.PedirSeleccionTurno();
+            DeterminarDisponibilidadPorFecha(hoy);
+            pantallaReserva.SolicitarSeleccionTurno();
         }
 
-        public DateTime GetFechaActual()
+        public DateTime ObtenerFechaHoraActual()
         {
             return DateTime.Today;
+        }
+
+        public void ValidarPertenenciaCI()
+        {
+
         }
 
         public void AgruparYOrdenarTurnos()
@@ -110,7 +112,7 @@ namespace PPAI_Implementacion.Gestor
 
         }
 
-        public void DisponibilidadPorFecha(DateTime fecha)
+        public void DeterminarDisponibilidadPorFecha(DateTime fecha)
         {
 
         }
@@ -118,15 +120,20 @@ namespace PPAI_Implementacion.Gestor
         public void TomarSeleccionTurno(int indexSeleccionado)
         {
             //turnoSeleccionado = seleccionado;
-            pantallaReserva.PedirConfirmacionTurno();
+            pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), tipoSelect, recursoSeleccionado.MostrarDatosRT());
         }
 
-        public void ReservarTurnoRT()
+        public void TomarConfirmacionReservaRT()
         {
 
         }
 
-        public void GenerarReservaTurno()
+        public void GenerarReservaRTSeleccionado()
+        {
+
+        }
+
+        public void GenerarMail()
         {
 
         }
@@ -137,6 +144,11 @@ namespace PPAI_Implementacion.Gestor
         }
 
         public void ObtenerMailCientifico()
+        {
+
+        }
+
+        public void FinCU()
         {
 
         }

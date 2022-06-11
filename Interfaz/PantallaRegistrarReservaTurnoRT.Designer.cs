@@ -1,7 +1,7 @@
 ﻿
 namespace PPAI_Implementacion.Interfaz
 {
-    partial class PantallaReserva
+    partial class PantallaRegistrarReservaTurnoRT
     {
         /// <summary>
         /// Required designer variable.
@@ -117,7 +117,7 @@ namespace PPAI_Implementacion.Interfaz
             this.btnTipoRecurso.TabIndex = 2;
             this.btnTipoRecurso.Text = "Buscar Recursos Tipo";
             this.btnTipoRecurso.UseVisualStyleBackColor = true;
-            this.btnTipoRecurso.Click += new System.EventHandler(this.SeleccionTipoRecurso);
+            this.btnTipoRecurso.Click += new System.EventHandler(this.TomarSeleccionTipoRT);
             // 
             // gbxRecurso
             // 
@@ -139,7 +139,7 @@ namespace PPAI_Implementacion.Interfaz
             this.btnRecurso.TabIndex = 1;
             this.btnRecurso.Text = "Seleccionar Recurso";
             this.btnRecurso.UseVisualStyleBackColor = true;
-            this.btnRecurso.Click += new System.EventHandler(this.SeleccionarRT);
+            this.btnRecurso.Click += new System.EventHandler(this.TomarSeleccionRT);
             // 
             // dgvRecursos
             // 
@@ -203,7 +203,7 @@ namespace PPAI_Implementacion.Interfaz
             this.btnTurno.TabIndex = 2;
             this.btnTurno.Text = "Seleccionar Turno";
             this.btnTurno.UseVisualStyleBackColor = true;
-            this.btnTurno.Click += new System.EventHandler(this.SeleccionarTurno);
+            this.btnTurno.Click += new System.EventHandler(this.TomarSeleccionTurno);
             // 
             // dgvHorasTurnos
             // 
@@ -285,7 +285,7 @@ namespace PPAI_Implementacion.Interfaz
             this.btnConfirmarReserva.TabIndex = 19;
             this.btnConfirmarReserva.Text = "Confirmar Reserva";
             this.btnConfirmarReserva.UseVisualStyleBackColor = true;
-            this.btnConfirmarReserva.Click += new System.EventHandler(this.ConfirmarReservaTurno);
+            this.btnConfirmarReserva.Click += new System.EventHandler(this.TomarConfirmacionReservaRT);
             // 
             // lblDatosRecurso
             // 
@@ -457,7 +457,7 @@ namespace PPAI_Implementacion.Interfaz
             this.cbxEmail.Text = "E-Mail";
             this.cbxEmail.UseVisualStyleBackColor = true;
             // 
-            // PantallaReserva
+            // PantallaRegistrarReservaTurnoRT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -466,8 +466,8 @@ namespace PPAI_Implementacion.Interfaz
             this.Controls.Add(this.gbxTurno);
             this.Controls.Add(this.gbxRecurso);
             this.Controls.Add(this.gbxTipoRecurso);
-            this.Name = "PantallaReserva";
-            this.Text = "PantallaReservaTurno";
+            this.Name = "PantallaRegistrarReservaTurnoRT";
+            this.Text = "PantallaRegistrarReservaTurnoRT";
             this.gbxTipoRecurso.ResumeLayout(false);
             this.gbxTipoRecurso.PerformLayout();
             this.gbxRecurso.ResumeLayout(false);

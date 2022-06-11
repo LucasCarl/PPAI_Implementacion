@@ -23,6 +23,11 @@ namespace PPAI_Implementacion.Clases
             return true;
         }
 
+        public void MostrarEstado()
+        {
+
+        }
+
         public void SetFechaHoraHasta(DateTime hora)
         {
             fechaHoraHasta = hora;

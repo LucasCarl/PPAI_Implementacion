@@ -24,14 +24,24 @@ namespace PPAI_Implementacion.Clases
         public List<AsignacionCientificoDelCI> cientificos;
         public List<RecursoTecnologico> recursosTecnologicos;
 
-        public string MostrarNombre()
+        public string GetNombre()
         {
             return nombre;
+        }
+
+        public void ObtenerCI()
+        {
+
         }
 
         public bool EsCientificoActivo(PersonalCientifico cientifico)
         {
             return true;
+        }
+
+        public void AsignarTurno()
+        {
+
         }
     }
 }

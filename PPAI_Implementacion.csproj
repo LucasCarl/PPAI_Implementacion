@@ -49,8 +49,6 @@
     <Compile Include="Clases\AsignacionCientificoDelCI.cs" />
     <Compile Include="Clases\CambioEstadoRT.cs" />
     <Compile Include="Clases\CambioEstadoTurno.cs" />
-    <Compile Include="Clases\Caracteristica.cs" />
-    <Compile Include="Clases\CaracteristicaRecurso.cs" />
     <Compile Include="Clases\CentroDeInvestigacion.cs" />
     <Compile Include="Clases\Estado.cs" />
     <Compile Include="Clases\HorarioRT.cs" />
@@ -62,19 +60,20 @@
     <Compile Include="Clases\TipoRecursoTecnologico.cs" />
     <Compile Include="Clases\Turno.cs" />
     <Compile Include="Clases\Usuario.cs" />
-    <Compile Include="Gestor\GestorTurnos.cs" />
+    <Compile Include="Gestor\GestorRegistrarReservaTurnoRT.cs" />
     <Compile Include="Interfaz\MenuInicial.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaz\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaz\PantallaReserva.cs">
+    <Compile Include="Interfaz\PantallaRegistrarReservaTurnoRT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaz\PantallaReserva.Designer.cs">
-      <DependentUpon>PantallaReserva.cs</DependentUpon>
+    <Compile Include="Interfaz\PantallaRegistrarReservaTurnoRT.Designer.cs">
+      <DependentUpon>PantallaRegistrarReservaTurnoRT.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObtencionDatos\EstadosDao.cs" />
     <Compile Include="ObtencionDatos\RecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TipoRecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TurnoDao.cs" />
@@ -83,8 +82,8 @@
     <EmbeddedResource Include="Interfaz\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaz\PantallaReserva.resx">
-      <DependentUpon>PantallaReserva.cs</DependentUpon>
+    <EmbeddedResource Include="Interfaz\PantallaRegistrarReservaTurnoRT.resx">
+      <DependentUpon>PantallaRegistrarReservaTurnoRT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
