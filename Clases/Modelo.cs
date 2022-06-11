@@ -20,9 +20,13 @@ namespace PPAI_Implementacion.Clases
             return nombre;
         }
 
-        public string MostrarModelo()
+        public string[] MostrarModelo()
         {
-            return GetNombre();
+            string[] nombres = new string[2];
+            nombres[0] = GetNombre();
+            nombres[1] = "Marca";
+
+            return nombres;
         }
     }
 }

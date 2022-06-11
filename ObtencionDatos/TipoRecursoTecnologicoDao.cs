@@ -32,15 +32,9 @@ namespace PPAI_Implementacion.ObtencionDatos
             return instancia;
         }
 
-        public List<string> ObtenerNombresTRT()
+        public List<TipoRecursoTecnologico> ObtenerTiposRT()
         {
-            List<string> nombresTipos = new List<string>();
-            foreach (TipoRecursoTecnologico tipo in tiposRecurso)
-            {
-                nombresTipos.Add(tipo.GetNombre());
-            }
-            
-            return nombresTipos;
+            return tiposRecurso;
         }
         
         public TipoRecursoTecnologico ObtenerTipoRecurso(string nombre)

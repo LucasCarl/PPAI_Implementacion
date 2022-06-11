@@ -22,9 +22,9 @@ namespace PPAI_Implementacion.Clases
             return nombre;
         }
 
-        public void MostrarTipoRT()
+        public string MostrarTipoRT()
         {
-
+            return GetNombre();
         }
     }
 }

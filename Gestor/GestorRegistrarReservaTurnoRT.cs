@@ -12,7 +12,7 @@ namespace PPAI_Implementacion.Gestor
     class GestorRegistrarReservaTurnoRT
     {
         private PantallaRegistrarReservaTurnoRT pantallaReserva;
-        private string tipoSelect;
+        private TipoRecursoTecnologico tipoSelect;
         private List<RecursoTecnologico> listaRecursos;
         private RecursoTecnologico recursoSeleccionado;
 
@@ -32,19 +32,26 @@ namespace PPAI_Implementacion.Gestor
 
         public void RegistrarReservaTurnoRT()
         {
-            List<string> listaRecursos = BuuscarTiposRT();
+            List<string> listaRecursos = BuscarTiposRT();
             listaRecursos.Insert(0, "TODOS");
             pantallaReserva.SolicitarSeleccionTipoRT(listaRecursos);
         }
 
-        public List<string> BuuscarTiposRT()
+        public List<string> BuscarTiposRT()
         {
-            return tipoRecursoTecnologicoDao.ObtenerNombresTRT();
+            List<TipoRecursoTecnologico> listaTipos = tipoRecursoTecnologicoDao.ObtenerTiposRT();
+            List<string> listaNombres = new List<string>();
+            foreach (TipoRecursoTecnologico tipo in listaTipos)
+            {
+                listaNombres.Add(tipo.MostrarTipoRT());
+            }
+
+            return listaNombres;
         }
 
         public void TomarSeleccionTipoRT(string seleccionado)
         {
-            tipoSelect = seleccionado;
+            tipoSelect = TipoRecursoTecnologicoDao.Instancia().ObtenerTipoRecurso(seleccionado);
             ObtenerRTActivoYDelTipo();
         }
 
@@ -52,16 +59,12 @@ namespace PPAI_Implementacion.Gestor
         {
             //Obtener todos los recursos
             List<RecursoTecnologico> listaTodosRecursos = recursoTecnologicoDao.ObtenerRecursos();
+            listaRecursos = new List<RecursoTecnologico>();
             List<string[]> listaDatosRecursos = new List<string[]>();
 
-            //Buscar los recursos del mismo tipo seleccionado
-            listaRecursos = new List<RecursoTecnologico>();
             foreach (RecursoTecnologico recurso in listaTodosRecursos)
             {
-                bool condicionTipo = (tipoSelect == "TODOS" || recurso.EsDeTipoRTSeleccionado(tipoRecursoTecnologicoDao.ObtenerTipoRecurso(tipoSelect)));
-                bool condicionActivo = recurso.EsActivo();
-
-                if(condicionTipo && condicionActivo)
+                if(recurso.EsDeTipoRTSeleccionado(tipoSelect) && recurso.EsActivo())
                 {
                     listaRecursos.Add(recurso);
                     listaDatosRecursos.Add(recurso.MostrarDatosRT());
@@ -120,7 +123,7 @@ namespace PPAI_Implementacion.Gestor
         public void TomarSeleccionTurno(int indexSeleccionado)
         {
             //turnoSeleccionado = seleccionado;
-            pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), tipoSelect, recursoSeleccionado.MostrarDatosRT());
+            //pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), tipoSelect, recursoSeleccionado.MostrarDatosRT());
         }
 
         public void TomarConfirmacionReservaRT()

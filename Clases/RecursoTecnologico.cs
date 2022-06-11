@@ -26,22 +26,36 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsDeTipoRTSeleccionado(TipoRecursoTecnologico tipo)
         {
-            return tipoRecurso.Equals(tipo);
+            if (tipo == null)
+                return true;
+            else
+                return tipo.MostrarTipoRT() == tipoRecurso.MostrarTipoRT();
         }
 
         public bool EsActivo()
         {
-            return true;
+            CambioEstadoRT ultimo = null;
+            foreach (CambioEstadoRT cambio in cambioEstadoRT)
+            {
+                if (cambio.EsActual())
+                {
+                    ultimo = cambio;
+                    break;
+                }
+            }
+
+            return ultimo.EsReservable();
         }
 
         public string[] MostrarDatosRT()
         {
-            string[] datos = new string[5];
-            datos[0] = numeroRT.ToString();
-            datos[1] = "CentroInvest";
-            datos[2] = modeloDelRT.GetNombre();
-            datos[3] = "Marca";
-            datos[4] = cambioEstadoRT[cambioEstadoRT.Count-1].GetEstado();
+            string[] datos = new string[5];     //0: NroInventario, 1: CentroInvest, 2: Modelo, 3: Marca, 4: Estado
+            datos[0] = GetNumeroRT().ToString();
+            datos[4] = cambioEstadoRT[cambioEstadoRT.Count-1].MostrarEstado();
+            datos[1] = ObtenerCI();
+            string[] marcaModelo = MostrarMarcaYModelo();   //0: Modelo, 1: Marca
+            datos[2] = marcaModelo[0];
+            datos[3] = marcaModelo[1];
 
             return datos;
         }
@@ -51,14 +65,14 @@ namespace PPAI_Implementacion.Clases
             return numeroRT;
         }
 
-        public void ObtenerCI()
+        public string ObtenerCI()
         {
-
+            return "Centro";
         }
 
         public string[] MostrarMarcaYModelo()
         {
-            return null;
+            return modeloDelRT.MostrarModelo();
         }
 
         public bool EsCientificoDelCI()

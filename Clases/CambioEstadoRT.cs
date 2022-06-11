@@ -28,7 +28,12 @@ namespace PPAI_Implementacion.Clases
             fechaHoraHasta = hora;
         }
 
-        public string GetEstado()
+        public bool EsReservable()
+        {
+            return estado.EsReservable();
+        }
+
+        public string MostrarEstado()
         {
             return estado.GetNombre();
         }

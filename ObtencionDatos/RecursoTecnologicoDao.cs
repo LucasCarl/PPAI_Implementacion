@@ -14,12 +14,7 @@ namespace PPAI_Implementacion.ObtencionDatos
         public RecursoTecnologicoDao()
         {
             TipoRecursoTecnologicoDao daoTipos = TipoRecursoTecnologicoDao.Instancia();
-            List<string> nombresTipos = daoTipos.ObtenerNombresTRT();
-            List<TipoRecursoTecnologico> listaTipos = new List<TipoRecursoTecnologico>();
-            foreach (string nombre in nombresTipos)
-            {
-                listaTipos.Add(daoTipos.ObtenerTipoRecurso(nombre));
-            }
+            List<TipoRecursoTecnologico> listaTipos = daoTipos.ObtenerTiposRT();
 
             todosRecursos = new List<RecursoTecnologico>();
             List<CambioEstadoRT> disponible = new List<CambioEstadoRT>();
