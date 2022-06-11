@@ -17,5 +17,15 @@ namespace PPAI_Implementacion.Clases
             fechaHoraDesde = desde;
             estado = est;
         }
+
+        public bool EsActual()
+        {
+            return true;
+        }
+
+        public void SetFechaHoraHasta(DateTime hora)
+        {
+            fechaHoraHasta = hora;
+        }
     }
 }

@@ -8,15 +8,25 @@ namespace PPAI_Implementacion.Clases
 {
     class TipoRecursoTecnologico
     {
-        public string Nombre { get; set; }
+        private string nombre;
         private string descripcion;
         //private List<Caracteristica> caracteristicas;
 
         public TipoRecursoTecnologico(string nom, string desc)
         {
-            Nombre = nom;
+            nombre = nom;
             descripcion = desc;
             //caracteristicas = listaCaract;
+        }
+
+        public void SetNombre(string nom)
+        {
+            nombre = nom;
+        }
+
+        public string GetNombre()
+        {
+            return nombre;
         }
 
         public void SetDescripcion(string desc)

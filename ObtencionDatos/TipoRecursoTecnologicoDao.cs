@@ -9,19 +9,58 @@ namespace PPAI_Implementacion.ObtencionDatos
 {
     class TipoRecursoTecnologicoDao
     {
-        public IList<TipoRecursoTecnologico> ObtenerTiposRecursos()
+        private static TipoRecursoTecnologicoDao instancia;
+        private List<TipoRecursoTecnologico> tiposRecurso;
+
+        public TipoRecursoTecnologicoDao()
         {
-            IList<TipoRecursoTecnologico> listaTipos = new List<TipoRecursoTecnologico>();
+            EncontrarTiposRecursos();
+        }
+
+        public static TipoRecursoTecnologicoDao Instancia()
+        {
+            if (instancia == null)
+                instancia = new TipoRecursoTecnologicoDao();
+
+            return instancia;
+        }
+
+        public void EncontrarTiposRecursos()
+        {
+            List<TipoRecursoTecnologico> listaTipos = new List<TipoRecursoTecnologico>();
             listaTipos.Add(new TipoRecursoTecnologico("Microscopio", "Ver moleculas"));
             listaTipos.Add(new TipoRecursoTecnologico("Balanza", "Medir peso"));
             listaTipos.Add(new TipoRecursoTecnologico("Telescopio", "Ver espacio exterior"));
             listaTipos.Add(new TipoRecursoTecnologico("Mechero Bunsen", "Calentar"));
             listaTipos.Add(new TipoRecursoTecnologico("Pipetas", "Almacenar liquidos"));
 
-            listaTipos.Insert(0, new TipoRecursoTecnologico("TODOS", "todos los tipos"));
-
-            return listaTipos;
+            tiposRecurso = listaTipos;
         }
 
+        public List<string> ObtenerNombresTRT()
+        {
+            List<string> nombresTipos = new List<string>();
+            foreach (TipoRecursoTecnologico tipo in tiposRecurso)
+            {
+                nombresTipos.Add(tipo.GetNombre());
+            }
+            
+            return nombresTipos;
+        }
+        
+        public TipoRecursoTecnologico ObtenerTipoRecurso(string nombre)
+        {
+            TipoRecursoTecnologico tipoRT = null;
+            foreach (TipoRecursoTecnologico tipo in tiposRecurso)
+            {
+                if(tipo.GetNombre() == nombre)
+                {
+                    tipoRT = tipo;
+                    break;
+                }
+            }
+            return tipoRT;
+        }
+        
     }
 }

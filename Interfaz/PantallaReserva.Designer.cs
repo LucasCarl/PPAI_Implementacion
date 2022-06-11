@@ -38,31 +38,33 @@ namespace PPAI_Implementacion.Interfaz
             this.dgvRecursos = new System.Windows.Forms.DataGridView();
             this.NroInventario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CentroInvestigacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbxTurno = new System.Windows.Forms.GroupBox();
             this.btnTurno = new System.Windows.Forms.Button();
             this.dgvHorasTurnos = new System.Windows.Forms.DataGridView();
+            this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cldDiasTurnos = new System.Windows.Forms.MonthCalendar();
             this.gbxConfirmacion = new System.Windows.Forms.GroupBox();
             this.btnCancelarReserva = new System.Windows.Forms.Button();
             this.btnConfirmarReserva = new System.Windows.Forms.Button();
             this.lblDatosRecurso = new System.Windows.Forms.Label();
             this.lblDatosTurno = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtHoraTurno = new System.Windows.Forms.TextBox();
             this.lblDatosHoraTurno = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtFechaTurno = new System.Windows.Forms.TextBox();
             this.lblDatosFechaTurno = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblDatosModelo = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtMarca = new System.Windows.Forms.TextBox();
             this.lblDatosMarca = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtCentroInvestigacion = new System.Windows.Forms.TextBox();
             this.lblDatosCentroInv = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTipoRecurso = new System.Windows.Forms.TextBox();
             this.lblDatosTipoRecurso = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNroInventario = new System.Windows.Forms.TextBox();
             this.lblDatosNroInv = new System.Windows.Forms.Label();
             this.gbxNotificacion = new System.Windows.Forms.GroupBox();
             this.cbxWhatsapp = new System.Windows.Forms.CheckBox();
@@ -145,12 +147,13 @@ namespace PPAI_Implementacion.Interfaz
             this.dgvRecursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NroInventario,
             this.CentroInvestigacion,
-            this.Marca,
             this.Modelo,
+            this.Marca,
             this.Estado});
             this.dgvRecursos.Enabled = false;
             this.dgvRecursos.Location = new System.Drawing.Point(8, 19);
             this.dgvRecursos.Name = "dgvRecursos";
+            this.dgvRecursos.RowHeadersWidth = 20;
             this.dgvRecursos.Size = new System.Drawing.Size(543, 150);
             this.dgvRecursos.TabIndex = 0;
             // 
@@ -164,15 +167,15 @@ namespace PPAI_Implementacion.Interfaz
             this.CentroInvestigacion.HeaderText = "Centro Investigacion";
             this.CentroInvestigacion.Name = "CentroInvestigacion";
             // 
-            // Marca
-            // 
-            this.Marca.HeaderText = "Marca";
-            this.Marca.Name = "Marca";
-            // 
             // Modelo
             // 
             this.Modelo.HeaderText = "Modelo";
             this.Modelo.Name = "Modelo";
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
             // 
             // Estado
             // 
@@ -205,19 +208,35 @@ namespace PPAI_Implementacion.Interfaz
             // dgvHorasTurnos
             // 
             this.dgvHorasTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHorasTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Horario,
+            this.EstadoTurno});
             this.dgvHorasTurnos.Enabled = false;
             this.dgvHorasTurnos.Location = new System.Drawing.Point(278, 22);
             this.dgvHorasTurnos.Name = "dgvHorasTurnos";
+            this.dgvHorasTurnos.RowHeadersWidth = 20;
             this.dgvHorasTurnos.Size = new System.Drawing.Size(158, 162);
             this.dgvHorasTurnos.TabIndex = 1;
+            // 
+            // Horario
+            // 
+            this.Horario.HeaderText = "Horario";
+            this.Horario.Name = "Horario";
+            // 
+            // EstadoTurno
+            // 
+            this.EstadoTurno.HeaderText = "Estado";
+            this.EstadoTurno.Name = "EstadoTurno";
             // 
             // cldDiasTurnos
             // 
             this.cldDiasTurnos.BackColor = System.Drawing.SystemColors.Window;
             this.cldDiasTurnos.Enabled = false;
             this.cldDiasTurnos.Location = new System.Drawing.Point(9, 22);
+            this.cldDiasTurnos.MaxSelectionCount = 1;
             this.cldDiasTurnos.Name = "cldDiasTurnos";
             this.cldDiasTurnos.TabIndex = 0;
+            this.cldDiasTurnos.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MostrarTurnosDia);
             // 
             // gbxConfirmacion
             // 
@@ -225,19 +244,19 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxConfirmacion.Controls.Add(this.btnConfirmarReserva);
             this.gbxConfirmacion.Controls.Add(this.lblDatosRecurso);
             this.gbxConfirmacion.Controls.Add(this.lblDatosTurno);
-            this.gbxConfirmacion.Controls.Add(this.textBox7);
+            this.gbxConfirmacion.Controls.Add(this.txtHoraTurno);
             this.gbxConfirmacion.Controls.Add(this.lblDatosHoraTurno);
-            this.gbxConfirmacion.Controls.Add(this.textBox6);
+            this.gbxConfirmacion.Controls.Add(this.txtFechaTurno);
             this.gbxConfirmacion.Controls.Add(this.lblDatosFechaTurno);
-            this.gbxConfirmacion.Controls.Add(this.textBox5);
+            this.gbxConfirmacion.Controls.Add(this.txtModelo);
             this.gbxConfirmacion.Controls.Add(this.lblDatosModelo);
-            this.gbxConfirmacion.Controls.Add(this.textBox4);
+            this.gbxConfirmacion.Controls.Add(this.txtMarca);
             this.gbxConfirmacion.Controls.Add(this.lblDatosMarca);
-            this.gbxConfirmacion.Controls.Add(this.textBox3);
+            this.gbxConfirmacion.Controls.Add(this.txtCentroInvestigacion);
             this.gbxConfirmacion.Controls.Add(this.lblDatosCentroInv);
-            this.gbxConfirmacion.Controls.Add(this.textBox2);
+            this.gbxConfirmacion.Controls.Add(this.txtTipoRecurso);
             this.gbxConfirmacion.Controls.Add(this.lblDatosTipoRecurso);
-            this.gbxConfirmacion.Controls.Add(this.textBox1);
+            this.gbxConfirmacion.Controls.Add(this.txtNroInventario);
             this.gbxConfirmacion.Controls.Add(this.lblDatosNroInv);
             this.gbxConfirmacion.Controls.Add(this.gbxNotificacion);
             this.gbxConfirmacion.Location = new System.Drawing.Point(575, 12);
@@ -286,13 +305,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosTurno.TabIndex = 17;
             this.lblDatosTurno.Text = "Datos Turno:";
             // 
-            // textBox7
+            // txtHoraTurno
             // 
-            this.textBox7.Enabled = false;
-            this.textBox7.Location = new System.Drawing.Point(119, 233);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 16;
+            this.txtHoraTurno.Enabled = false;
+            this.txtHoraTurno.Location = new System.Drawing.Point(119, 233);
+            this.txtHoraTurno.Name = "txtHoraTurno";
+            this.txtHoraTurno.Size = new System.Drawing.Size(100, 20);
+            this.txtHoraTurno.TabIndex = 16;
             // 
             // lblDatosHoraTurno
             // 
@@ -303,13 +322,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosHoraTurno.TabIndex = 15;
             this.lblDatosHoraTurno.Text = "Hora Turno";
             // 
-            // textBox6
+            // txtFechaTurno
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(119, 207);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 14;
+            this.txtFechaTurno.Enabled = false;
+            this.txtFechaTurno.Location = new System.Drawing.Point(119, 207);
+            this.txtFechaTurno.Name = "txtFechaTurno";
+            this.txtFechaTurno.Size = new System.Drawing.Size(100, 20);
+            this.txtFechaTurno.TabIndex = 14;
             // 
             // lblDatosFechaTurno
             // 
@@ -320,13 +339,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosFechaTurno.TabIndex = 13;
             this.lblDatosFechaTurno.Text = "Fecha Turno";
             // 
-            // textBox5
+            // txtModelo
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(119, 152);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 12;
+            this.txtModelo.Enabled = false;
+            this.txtModelo.Location = new System.Drawing.Point(119, 152);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(100, 20);
+            this.txtModelo.TabIndex = 12;
             // 
             // lblDatosModelo
             // 
@@ -337,13 +356,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosModelo.TabIndex = 11;
             this.lblDatosModelo.Text = "Modelo";
             // 
-            // textBox4
+            // txtMarca
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(119, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 10;
+            this.txtMarca.Enabled = false;
+            this.txtMarca.Location = new System.Drawing.Point(119, 126);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(100, 20);
+            this.txtMarca.TabIndex = 10;
             // 
             // lblDatosMarca
             // 
@@ -354,13 +373,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosMarca.TabIndex = 9;
             this.lblDatosMarca.Text = "Marca";
             // 
-            // textBox3
+            // txtCentroInvestigacion
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(119, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 8;
+            this.txtCentroInvestigacion.Enabled = false;
+            this.txtCentroInvestigacion.Location = new System.Drawing.Point(119, 100);
+            this.txtCentroInvestigacion.Name = "txtCentroInvestigacion";
+            this.txtCentroInvestigacion.Size = new System.Drawing.Size(100, 20);
+            this.txtCentroInvestigacion.TabIndex = 8;
             // 
             // lblDatosCentroInv
             // 
@@ -371,13 +390,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosCentroInv.TabIndex = 7;
             this.lblDatosCentroInv.Text = "Centro Investigacion";
             // 
-            // textBox2
+            // txtTipoRecurso
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(119, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
+            this.txtTipoRecurso.Enabled = false;
+            this.txtTipoRecurso.Location = new System.Drawing.Point(119, 74);
+            this.txtTipoRecurso.Name = "txtTipoRecurso";
+            this.txtTipoRecurso.Size = new System.Drawing.Size(100, 20);
+            this.txtTipoRecurso.TabIndex = 6;
             // 
             // lblDatosTipoRecurso
             // 
@@ -388,13 +407,13 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosTipoRecurso.TabIndex = 5;
             this.lblDatosTipoRecurso.Text = "Tipo Recurso";
             // 
-            // textBox1
+            // txtNroInventario
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(119, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtNroInventario.Enabled = false;
+            this.txtNroInventario.Location = new System.Drawing.Point(119, 48);
+            this.txtNroInventario.Name = "txtNroInventario";
+            this.txtNroInventario.Size = new System.Drawing.Size(100, 20);
+            this.txtNroInventario.TabIndex = 4;
             // 
             // lblDatosNroInv
             // 
@@ -472,11 +491,6 @@ namespace PPAI_Implementacion.Interfaz
         private System.Windows.Forms.GroupBox gbxRecurso;
         private System.Windows.Forms.DataGridView dgvRecursos;
         private System.Windows.Forms.Button btnRecurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NroInventario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CentroInvestigacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.GroupBox gbxTurno;
         private System.Windows.Forms.DataGridView dgvHorasTurnos;
         private System.Windows.Forms.MonthCalendar cldDiasTurnos;
@@ -489,19 +503,26 @@ namespace PPAI_Implementacion.Interfaz
         private System.Windows.Forms.Button btnConfirmarReserva;
         private System.Windows.Forms.Label lblDatosRecurso;
         private System.Windows.Forms.Label lblDatosTurno;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtHoraTurno;
         private System.Windows.Forms.Label lblDatosHoraTurno;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtFechaTurno;
         private System.Windows.Forms.Label lblDatosFechaTurno;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label lblDatosModelo;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.Label lblDatosMarca;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtCentroInvestigacion;
         private System.Windows.Forms.Label lblDatosCentroInv;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTipoRecurso;
         private System.Windows.Forms.Label lblDatosTipoRecurso;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNroInventario;
         private System.Windows.Forms.Label lblDatosNroInv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroInventario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CentroInvestigacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Horario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoTurno;
     }
 }

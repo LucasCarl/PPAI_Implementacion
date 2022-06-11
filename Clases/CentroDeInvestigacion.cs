@@ -9,8 +9,8 @@ namespace PPAI_Implementacion.Clases
     class CentroDeInvestigacion
     {
         public string nombre;
-        public string sigla;
         /*
+        public string sigla;
         public string direccion;
         public string edificio;
         public int piso;
@@ -24,6 +24,14 @@ namespace PPAI_Implementacion.Clases
         public List<AsignacionCientificoDelCI> cientificos;
         public List<RecursoTecnologico> recursosTecnologicos;
 
+        public string MostrarNombre()
+        {
+            return nombre;
+        }
 
+        public bool EsCientificoActivo(PersonalCientifico cientifico)
+        {
+            return true;
+        }
     }
 }

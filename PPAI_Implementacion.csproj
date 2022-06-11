@@ -58,6 +58,7 @@
     <Compile Include="Clases\Modelo.cs" />
     <Compile Include="Clases\PersonalCientifico.cs" />
     <Compile Include="Clases\RecursoTecnologico.cs" />
+    <Compile Include="Clases\Sesion.cs" />
     <Compile Include="Clases\TipoRecursoTecnologico.cs" />
     <Compile Include="Clases\Turno.cs" />
     <Compile Include="Clases\Usuario.cs" />
@@ -76,6 +77,7 @@
     </Compile>
     <Compile Include="ObtencionDatos\RecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TipoRecursoTecnologicoDao.cs" />
+    <Compile Include="ObtencionDatos\TurnoDao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\MenuInicial.resx">

@@ -18,5 +18,15 @@ namespace PPAI_Implementacion.Clases
             fechaDesde = desde;
             personalCientifico = cientifico;
         }
+
+        public bool EsCientificoActivo()
+        {
+            return true;
+        }
+
+        public void AgregarNuevoTurno(Turno turnoNuevo)
+        {
+            turnos.Add(turnoNuevo);
+        }
     }
 }

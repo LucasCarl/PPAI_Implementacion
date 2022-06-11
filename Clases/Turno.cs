@@ -19,5 +19,20 @@ namespace PPAI_Implementacion.Clases
             fechaHoraInicio = desde;
             fechaHoraFin = hasta;
         }
+
+        public bool EsPosteriorAFechaActual()
+        {
+            return fechaHoraInicio > DateTime.Now;
+        }
+
+        public void MostrarTurno()
+        {
+
+        }
+
+        public void ReservarTurno()
+        {
+
+        }
     }
 }

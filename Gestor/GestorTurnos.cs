@@ -12,45 +12,79 @@ namespace PPAI_Implementacion.Gestor
     class GestorTurnos
     {
         private PantallaReserva pantallaReserva;
+        /*
         private TipoRecursoTecnologico tipoSeleccionado;
-        private RecursoTecnologico recursoSeleccionado;
         private Turno turnoSeleccionado;
+        */
+        private string tipoSelect;
+        private List<RecursoTecnologico> listaRecursos;
+        private RecursoTecnologico recursoSeleccionado;
+
+        private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
+        private RecursoTecnologicoDao recursoTecnologicoDao;
+        private TurnoDao turnoDao;
 
         public GestorTurnos(PantallaReserva pantalla)
         {
             pantallaReserva = pantalla;
+            tipoRecursoTecnologicoDao = TipoRecursoTecnologicoDao.Instancia();
+            recursoTecnologicoDao = RecursoTecnologicoDao.Instancia();
+            turnoDao = TurnoDao.Instancia();
         }
 
         public void NuevaReservaTurno()
         {
-            IList<TipoRecursoTecnologico> listaRecursos = ObtenerTipoRecurso();
+            List<string> listaRecursos = ObtenerTipoRecurso();
+            listaRecursos.Insert(0, "TODOS");
             pantallaReserva.PedirSeleccionTRT(listaRecursos);
         }
 
-        public IList<TipoRecursoTecnologico> ObtenerTipoRecurso()
+        public List<string> ObtenerTipoRecurso()
         {
-            TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao = new TipoRecursoTecnologicoDao();
-            return tipoRecursoTecnologicoDao.ObtenerTiposRecursos();
+            return tipoRecursoTecnologicoDao.ObtenerNombresTRT();
         }
 
-        public void TomarSeleccionTRT(TipoRecursoTecnologico seleccionado)
+        public void TomarSeleccionTRT(string seleccionado)
         {
-            tipoSeleccionado = seleccionado;
+            //tipoSeleccionado = tipoRecursoTecnologicoDao.ObtenerTipoRecurso(seleccionado);
+            tipoSelect = seleccionado;
+            BuscarRT();
         }
 
-        public RecursoTecnologico[] BuscarRT()
+        public void BuscarRT()
         {
-            return new RecursoTecnologico[2];
+            //Obtener todos los recursos
+            List<RecursoTecnologico> listaTodosRecursos = recursoTecnologicoDao.ObtenerRecursos();
+            List<string[]> listaDatosRecursos = new List<string[]>();
+
+            //Buscar los recursos del mismo tipo seleccionado
+            listaRecursos = new List<RecursoTecnologico>();
+            foreach (RecursoTecnologico recurso in listaTodosRecursos)
+            {
+                bool condicionTipo = (tipoSelect == "TODOS" || recurso.SosTipo(tipoRecursoTecnologicoDao.ObtenerTipoRecurso(tipoSelect)));
+                bool condicionActivo = recurso.SosActivo();
+
+                if(condicionTipo && condicionActivo)
+                {
+                    listaRecursos.Add(recurso);
+                    listaDatosRecursos.Add(recurso.MostrarDatos());
+                }
+            }
+
+            AgruparPorCI();
+            pantallaReserva.PedirSeleccionRT(listaDatosRecursos);
         }
 
         public void AgruparPorCI()
         {
-
+            //Algo
         }
 
-        public void TomarSeleccionRT(RecursoTecnologico seleccionado)
+        public void TomarSeleccionRT(int indexSeleccionado)
         {
-            recursoSeleccionado = seleccionado;
+            recursoSeleccionado = listaRecursos[indexSeleccionado];
+            VerificarCIDeCLogueado();
+            ObtenerTurnosReservables();
         }
 
         public void VerificarCIDeCLogueado()
@@ -60,12 +94,15 @@ namespace PPAI_Implementacion.Gestor
 
         public void ObtenerTurnosReservables()
         {
-
+            DateTime hoy = GetFechaActual();
+            AgruparYOrdenarTurnos();
+            DisponibilidadPorFecha(hoy);
+            pantallaReserva.PedirSeleccionTurno();
         }
 
-        public void GetFechaActual()
+        public DateTime GetFechaActual()
         {
-
+            return DateTime.Today;
         }
 
         public void AgruparYOrdenarTurnos()
@@ -73,14 +110,15 @@ namespace PPAI_Implementacion.Gestor
 
         }
 
-        public void DisponibilidadPorFecha()
+        public void DisponibilidadPorFecha(DateTime fecha)
         {
 
         }
 
-        public void TomarSeleccionTurno(Turno seleccionado)
+        public void TomarSeleccionTurno(int indexSeleccionado)
         {
-            turnoSeleccionado = seleccionado;
+            //turnoSeleccionado = seleccionado;
+            pantallaReserva.PedirConfirmacionTurno();
         }
 
         public void ReservarTurnoRT()

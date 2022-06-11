@@ -11,5 +11,10 @@ namespace PPAI_Implementacion.Clases
         private string clave;
         private string nombreUsuario;
         private bool habilitado;
+
+        public PersonalCientifico ObtenerCientifico()
+        {
+            return new PersonalCientifico();
+        }
     }
 }

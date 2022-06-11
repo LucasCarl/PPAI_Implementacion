@@ -16,5 +16,15 @@ namespace PPAI_Implementacion.Clases
         private string correoElectronicoPersonal;
         private string telefonoCelular;
         private Usuario usuario;
+
+        public string ObtenerCorreo()
+        {
+            return correoElectronicoInstitucional;
+        }
+
+        public string ObtenerTelefono()
+        {
+            return telefonoCelular;
+        }
     }
 }
