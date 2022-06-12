@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PPAI_Implementacion.ObtencionDatos;
 
 namespace PPAI_Implementacion.Clases
 {
@@ -24,7 +25,7 @@ namespace PPAI_Implementacion.Clases
         {
             string[] nombres = new string[2];
             nombres[0] = GetNombre();
-            nombres[1] = "Marca";
+            nombres[1] = ModeloMarcaDao.Instancia().ObtenerMarcaDeModelo(this).GetNombre();
 
             return nombres;
         }

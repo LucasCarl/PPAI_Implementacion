@@ -69,11 +69,11 @@ namespace PPAI_Implementacion.Interfaz
                         break;
 
                     case "En Mantenimiento":
-                        colorEstado = Color.Green;
+                        colorEstado = Color.LimeGreen;
                         break;
 
                     case "Inicio Mantenimiento Preventivo":
-                        colorEstado = Color.LightGray;
+                        colorEstado = Color.DarkGray;
                         break;
 
                     default:
@@ -94,7 +94,7 @@ namespace PPAI_Implementacion.Interfaz
             gestorTurnos.TomarSeleccionRT(dgvRecursos.CurrentRow.Index);
         }
 
-        public void SolicitarSeleccionTurno()
+        public void SolicitarSeleccionTurno(List<string[]> listaTurno)
         {
             cldDiasTurnos.Enabled = true;
             dgvHorasTurnos.Enabled = true;
@@ -137,7 +137,9 @@ namespace PPAI_Implementacion.Interfaz
 
         private void MostrarTurnosDia(object sender, DateRangeEventArgs e)
         {
-            gestorTurnos.DeterminarDisponibilidadPorFecha(cldDiasTurnos.SelectionStart.Date);
+            List<string[]> datosTurnos = gestorTurnos.DeterminarDisponibilidadPorFecha(cldDiasTurnos.SelectionStart.Date);
+            dgvHorasTurnos.DataSource = null;
+            dgvHorasTurnos.DataSource = datosTurnos;
         }
 
         private void MensajeNadaSeleccionado(string mensaje)

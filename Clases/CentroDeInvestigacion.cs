@@ -24,14 +24,22 @@ namespace PPAI_Implementacion.Clases
         public List<AsignacionCientificoDelCI> cientificos;
         public List<RecursoTecnologico> recursosTecnologicos;
 
+        public CentroDeInvestigacion(string nom, int minsAntelacion, List<AsignacionCientificoDelCI> listaCientificos, List<RecursoTecnologico> listaRecursos)
+        {
+            nombre = nom;
+            tiempoAntelacionReserva = minsAntelacion;
+            cientificos = listaCientificos;
+            recursosTecnologicos = listaRecursos;
+        }
+
         public string GetNombre()
         {
             return nombre;
         }
 
-        public void ObtenerCI()
+        public string ObtenerCI()
         {
-
+            return GetNombre();
         }
 
         public bool EsCientificoActivo(PersonalCientifico cientifico)
@@ -42,6 +50,11 @@ namespace PPAI_Implementacion.Clases
         public void AsignarTurno()
         {
 
+        }
+
+        public List<RecursoTecnologico> GetRecursos()
+        {
+            return recursosTecnologicos;
         }
     }
 }

@@ -73,7 +73,9 @@
     <Compile Include="Interfaz\PantallaRegistrarReservaTurnoRT.Designer.cs">
       <DependentUpon>PantallaRegistrarReservaTurnoRT.cs</DependentUpon>
     </Compile>
-    <Compile Include="ObtencionDatos\EstadosDao.cs" />
+    <Compile Include="ObtencionDatos\CentroInvestigacionDao.cs" />
+    <Compile Include="ObtencionDatos\EstadoDao.cs" />
+    <Compile Include="ObtencionDatos\ModeloMarcaDao.cs" />
     <Compile Include="ObtencionDatos\RecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TipoRecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TurnoDao.cs" />

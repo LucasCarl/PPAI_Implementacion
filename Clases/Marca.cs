@@ -26,5 +26,10 @@ namespace PPAI_Implementacion.Clases
         {
 
         }
+
+        public List<Modelo> GetModelos()
+        {
+            return modelos;
+        }
     }
 }

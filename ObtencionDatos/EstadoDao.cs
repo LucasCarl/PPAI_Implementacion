@@ -7,12 +7,12 @@ using PPAI_Implementacion.Clases;
 
 namespace PPAI_Implementacion.ObtencionDatos
 {
-    class EstadosDao
+    class EstadoDao
     {
-        private static EstadosDao instancia;
+        private static EstadoDao instancia;
         private List<Estado> listaEstados;
 
-        public EstadosDao()
+        public EstadoDao()
         {
             listaEstados = new List<Estado>();
             listaEstados.Add(new Estado("Disponible", "Disponible para uso", "RecursoTecnologico", true, false));
@@ -23,10 +23,10 @@ namespace PPAI_Implementacion.ObtencionDatos
             listaEstados.Add(new Estado("Reservado", "turno reservado", "Turno", false, true)); 
         }
 
-        public static EstadosDao Instancia()
+        public static EstadoDao Instancia()
         {
             if (instancia == null)
-                instancia = new EstadosDao();
+                instancia = new EstadoDao();
 
             return instancia;
         }

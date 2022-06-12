@@ -15,11 +15,14 @@ namespace PPAI_Implementacion.Gestor
         private TipoRecursoTecnologico tipoSelect;
         private List<RecursoTecnologico> listaRecursos;
         private RecursoTecnologico recursoSeleccionado;
+        private List<Turno> listaTurnos;
+        private Turno turnoSeleccionado;
 
         private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
         private RecursoTecnologicoDao recursoTecnologicoDao;
         private TurnoDao turnoDao;
-        private EstadosDao estadosDao;
+        private EstadoDao estadoDao;
+        private CentroInvestigacionDao centroDao;
 
         public GestorRegistrarReservaTurnoRT(PantallaRegistrarReservaTurnoRT pantalla)
         {
@@ -27,7 +30,8 @@ namespace PPAI_Implementacion.Gestor
             tipoRecursoTecnologicoDao = TipoRecursoTecnologicoDao.Instancia();
             recursoTecnologicoDao = RecursoTecnologicoDao.Instancia();
             turnoDao = TurnoDao.Instancia();
-            estadosDao = EstadosDao.Instancia();
+            estadoDao = EstadoDao.Instancia();
+            centroDao = CentroInvestigacionDao.Instancia();
         }
 
         public void RegistrarReservaTurnoRT()
@@ -62,6 +66,7 @@ namespace PPAI_Implementacion.Gestor
             listaRecursos = new List<RecursoTecnologico>();
             List<string[]> listaDatosRecursos = new List<string[]>();
 
+            //Filtrar todos los recursos para obtener los activos y del tipo seleccionado
             foreach (RecursoTecnologico recurso in listaTodosRecursos)
             {
                 if(recurso.EsDeTipoRTSeleccionado(tipoSelect) && recurso.EsActivo())
@@ -71,33 +76,35 @@ namespace PPAI_Implementacion.Gestor
                 }
             }
 
-            OrdenarYAgruparRTPorCI();
+            OrdenarYAgruparRTPorCI(listaDatosRecursos);
             pantallaReserva.SolicitarSeleccionRT(listaDatosRecursos);
         }
 
-        public void OrdenarYAgruparRTPorCI()
+        public void OrdenarYAgruparRTPorCI(List<string[]> listaDatos)
         {
-            //Algo
+            listaDatos.Sort((x, y) => x[1].CompareTo(y[1]));
+            listaRecursos.Sort((x, y) => x.ObtenerCI().CompareTo(y.ObtenerCI()));
         }
 
         public void TomarSeleccionRT(int indexSeleccionado)
         {
             recursoSeleccionado = listaRecursos[indexSeleccionado];
-            ObtenerCientificoLogueado();
             ObtenerTurnosReservablesRTSeleccionado();
         }
 
-        public void ObtenerCientificoLogueado()
+        public PersonalCientifico ObtenerCientificoLogueado()
         {
-
+            return null;
         }
 
         public void ObtenerTurnosReservablesRTSeleccionado()
         {
+            listaTurnos = recursoSeleccionado.GetTurnos();
+            bool mismoCientro = ValidarPertenenciaCI(ObtenerCientificoLogueado());  //Cambio EN secuencia, estos 2 metodos dsp de obtenerTurnosReservables
             DateTime hoy = ObtenerFechaHoraActual();
             AgruparYOrdenarTurnos();
-            DeterminarDisponibilidadPorFecha(hoy);
-            pantallaReserva.SolicitarSeleccionTurno();
+            
+            pantallaReserva.SolicitarSeleccionTurno(DeterminarDisponibilidadPorFecha(hoy));
         }
 
         public DateTime ObtenerFechaHoraActual()
@@ -105,9 +112,9 @@ namespace PPAI_Implementacion.Gestor
             return DateTime.Today;
         }
 
-        public void ValidarPertenenciaCI()
+        public bool ValidarPertenenciaCI(PersonalCientifico cientifico)
         {
-
+            return true;
         }
 
         public void AgruparYOrdenarTurnos()
@@ -115,9 +122,16 @@ namespace PPAI_Implementacion.Gestor
 
         }
 
-        public void DeterminarDisponibilidadPorFecha(DateTime fecha)
+        public List<string[]> DeterminarDisponibilidadPorFecha(DateTime fecha)
         {
+            listaTurnos.Where(turno => turno.GetFechaInicio() > fecha);
+            List<string[]> datosTurnos = new List<string[]>();
+            foreach (Turno turno in listaTurnos)
+            {
+                datosTurnos.Add(turno.MostrarTurno());
+            }
 
+            return datosTurnos;
         }
 
         public void TomarSeleccionTurno(int indexSeleccionado)

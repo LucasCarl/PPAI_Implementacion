@@ -25,14 +25,24 @@ namespace PPAI_Implementacion.Clases
             return fechaHoraInicio > DateTime.Now;
         }
 
-        public void MostrarTurno()
+        public string[] MostrarTurno()
         {
+            string[] datos = new string[3];
+            datos[0] = fechaHoraInicio.Hour + ":" + fechaHoraInicio.Minute;
+            datos[1] = fechaHoraFin.Hour + ":" + fechaHoraFin.Minute;
+            datos[2] = "estado";
 
+            return datos;
         }
 
         public void ReservarTurno()
         {
 
+        }
+
+        public DateTime GetFechaInicio()
+        {
+            return fechaHoraInicio;
         }
     }
 }

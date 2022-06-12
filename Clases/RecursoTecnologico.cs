@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PPAI_Implementacion.ObtencionDatos;
 
 namespace PPAI_Implementacion.Clases
 {
@@ -16,12 +17,13 @@ namespace PPAI_Implementacion.Clases
         private List<CambioEstadoRT> cambioEstadoRT;
         private List<Turno> turnos;
 
-        public RecursoTecnologico(int nro, TipoRecursoTecnologico tipo, Modelo mod, List<CambioEstadoRT> estados)
+        public RecursoTecnologico(int nro, TipoRecursoTecnologico tipo, Modelo mod, List<CambioEstadoRT> estados, List<Turno> listaTurnos)
         {
             numeroRT = nro;
             tipoRecurso = tipo;
             modeloDelRT = mod;
             cambioEstadoRT = estados;
+            turnos = listaTurnos;
         }
 
         public bool EsDeTipoRTSeleccionado(TipoRecursoTecnologico tipo)
@@ -67,7 +69,7 @@ namespace PPAI_Implementacion.Clases
 
         public string ObtenerCI()
         {
-            return "Centro";
+            return CentroInvestigacionDao.Instancia().ObtenerCIDeRecurso(this).GetNombre();
         }
 
         public string[] MostrarMarcaYModelo()
@@ -88,6 +90,11 @@ namespace PPAI_Implementacion.Clases
         public void RegistrarReservaTurno()
         {
 
+        }
+
+        public List<Turno> GetTurnos()
+        {
+            return turnos;
         }
     }
 }
