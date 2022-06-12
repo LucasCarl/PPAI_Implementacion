@@ -28,8 +28,8 @@ namespace PPAI_Implementacion.Clases
         public string[] MostrarTurno()
         {
             string[] datos = new string[3];
-            datos[0] = fechaHoraInicio.Hour + ":" + fechaHoraInicio.Minute;
-            datos[1] = fechaHoraFin.Hour + ":" + fechaHoraFin.Minute;
+            datos[0] = fechaHoraInicio.ToString();
+            datos[1] = fechaHoraFin.ToString();
             datos[2] = "estado";
 
             return datos;

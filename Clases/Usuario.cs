@@ -14,7 +14,7 @@ namespace PPAI_Implementacion.Clases
 
         public PersonalCientifico ObtenerCientifico()
         {
-            return new PersonalCientifico();
+            return new PersonalCientifico("a@utn.frc.edu.ar", "351836452", new Usuario());
         }
     }
 }

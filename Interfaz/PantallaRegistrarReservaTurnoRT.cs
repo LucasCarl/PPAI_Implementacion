@@ -21,6 +21,7 @@ namespace PPAI_Implementacion.Interfaz
             gestorTurnos = new Gestor.GestorRegistrarReservaTurnoRT(this);
 
             dgvRecursos.AutoGenerateColumns = false;
+            dgvHorasTurnos.AutoGenerateColumns = false;
         }
 
         public void OpcionRegistrarReservarDeRT()
@@ -119,14 +120,23 @@ namespace PPAI_Implementacion.Interfaz
             txtModelo.Text = datosRecurso[2];
             txtMarca.Text = datosRecurso[3];
 
+            txtFechaTurno.Text = datosTurno[0];
+            txtHoraTurno.Text = datosTurno[1];
 
             cbxEmail.Enabled = true;
+            cbxEmail.Checked = true;
             cbxWhatsapp.Enabled = true;
             btnConfirmarReserva.Enabled = true;
         }
 
         private void TomarConfirmacionReservaRT(object sender, EventArgs e)
         {
+            //Checkea que al menos un metodo de notificacion este seleccionado
+            if(!cbxEmail.Checked && !cbxWhatsapp.Checked)
+            {
+                MensajeNadaSeleccionado("Seleccione al menos un método de notificacion.");
+                return;
+            }
             gestorTurnos.TomarConfirmacionReservaRT();
         }
 
@@ -138,13 +148,26 @@ namespace PPAI_Implementacion.Interfaz
         private void MostrarTurnosDia(object sender, DateRangeEventArgs e)
         {
             List<string[]> datosTurnos = gestorTurnos.DeterminarDisponibilidadPorFecha(cldDiasTurnos.SelectionStart.Date);
-            dgvHorasTurnos.DataSource = null;
             dgvHorasTurnos.DataSource = datosTurnos;
+            for (int i = 0; i < datosTurnos.Count; i++)
+            {
+                string horario = datosTurnos[i][0] + " - " + datosTurnos[i][1];
+                dgvHorasTurnos.Rows[i].Cells[0].Value = horario;
+                dgvHorasTurnos.Rows[i].Cells[1].Value = datosTurnos[i][2];
+
+                //Agregar cambio color turno estado
+            }
         }
 
         private void MensajeNadaSeleccionado(string mensaje)
         {
             MessageBox.Show(mensaje, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public void MensajeCUFin()
+        {
+            MessageBox.Show("Turno registrado con éxito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }

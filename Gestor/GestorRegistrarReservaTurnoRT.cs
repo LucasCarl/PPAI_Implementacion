@@ -16,7 +16,9 @@ namespace PPAI_Implementacion.Gestor
         private List<RecursoTecnologico> listaRecursos;
         private RecursoTecnologico recursoSeleccionado;
         private List<Turno> listaTurnos;
+        private List<Turno> listaTurnosFecha;
         private Turno turnoSeleccionado;
+        private PersonalCientifico cientificoLogueado;
 
         private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
         private RecursoTecnologicoDao recursoTecnologicoDao;
@@ -94,13 +96,14 @@ namespace PPAI_Implementacion.Gestor
 
         public PersonalCientifico ObtenerCientificoLogueado()
         {
-            return null;
+            return new PersonalCientifico("a@utn.frc.edu.ar", "351836452", new Usuario());
         }
 
         public void ObtenerTurnosReservablesRTSeleccionado()
         {
             listaTurnos = recursoSeleccionado.GetTurnos();
-            bool mismoCientro = ValidarPertenenciaCI(ObtenerCientificoLogueado());  //Cambio EN secuencia, estos 2 metodos dsp de obtenerTurnosReservables
+            cientificoLogueado = ObtenerCientificoLogueado();
+            bool mismoCientro = ValidarPertenenciaCI(cientificoLogueado);  //Cambio EN secuencia, estos 2 metodos dsp de obtenerTurnosReservables
             DateTime hoy = ObtenerFechaHoraActual();
             AgruparYOrdenarTurnos();
             
@@ -119,14 +122,14 @@ namespace PPAI_Implementacion.Gestor
 
         public void AgruparYOrdenarTurnos()
         {
-
+            listaTurnos.Sort((x,y) => x.GetFechaInicio().CompareTo(y.GetFechaInicio()));
         }
 
         public List<string[]> DeterminarDisponibilidadPorFecha(DateTime fecha)
         {
-            listaTurnos.Where(turno => turno.GetFechaInicio() > fecha);
+            listaTurnosFecha = listaTurnos.FindAll(turno => turno.GetFechaInicio().Date == fecha.Date);
             List<string[]> datosTurnos = new List<string[]>();
-            foreach (Turno turno in listaTurnos)
+            foreach (Turno turno in listaTurnosFecha)
             {
                 datosTurnos.Add(turno.MostrarTurno());
             }
@@ -136,38 +139,41 @@ namespace PPAI_Implementacion.Gestor
 
         public void TomarSeleccionTurno(int indexSeleccionado)
         {
-            //turnoSeleccionado = seleccionado;
-            //pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), tipoSelect, recursoSeleccionado.MostrarDatosRT());
+            turnoSeleccionado = listaTurnosFecha[indexSeleccionado];
+            pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), recursoSeleccionado.GetTipo().GetNombre(), turnoSeleccionado.MostrarTurno());
         }
 
         public void TomarConfirmacionReservaRT()
         {
-
+            GenerarReservaRTSeleccionado();
         }
 
         public void GenerarReservaRTSeleccionado()
         {
-
+            Estado estadoReservado = ObtenerEstadoReservado();
+            string emailCientifico = ObtenerMailCientifico();
+            GenerarMail();
+            FinCU();
         }
 
         public void GenerarMail()
         {
-
+            //GenerarNotificacionMail
         }
 
-        public void ObtenerEstadoReservado()
+        public Estado ObtenerEstadoReservado()
         {
-
+            return null;
         }
 
-        public void ObtenerMailCientifico()
+        public string ObtenerMailCientifico()
         {
-
+            return cientificoLogueado.ObtenerMail();
         }
 
         public void FinCU()
         {
-
+            pantallaReserva.MensajeCUFin();
         }
     }
 }

@@ -96,5 +96,10 @@ namespace PPAI_Implementacion.Clases
         {
             return turnos;
         }
+
+        public TipoRecursoTecnologico GetTipo()
+        {
+            return tipoRecurso;
+        }
     }
 }

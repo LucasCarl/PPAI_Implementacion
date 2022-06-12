@@ -236,7 +236,7 @@ namespace PPAI_Implementacion.Interfaz
             this.cldDiasTurnos.MaxSelectionCount = 1;
             this.cldDiasTurnos.Name = "cldDiasTurnos";
             this.cldDiasTurnos.TabIndex = 0;
-            this.cldDiasTurnos.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MostrarTurnosDia);
+            this.cldDiasTurnos.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MostrarTurnosDia);
             // 
             // gbxConfirmacion
             // 

@@ -34,11 +34,23 @@ namespace PPAI_Implementacion.ObtencionDatos
 
             //asignar turnos a cada lista
             List<Turno> listaTodosTurnos = TurnoDao.Instancia().GetTurnos();
+            int turnoNro = 0;
+            int recNro = 0;
             for (int i = 0; i < listaTodosTurnos.Count; i++)
             {
-                listasTurnoParaRecursos[i % 3].Add(listaTodosTurnos[i]);
-            }
+                listasTurnoParaRecursos[recNro].Add(listaTodosTurnos[i]);
+                
+                //Mandar turno a lista de cada recurso
+                turnoNro++;
+                if(turnoNro == 3)
+                {
+                    recNro++;
+                    turnoNro = 0;
+                }
 
+                if (recNro == 10)
+                    recNro = 0;
+            }
 
             todosRecursos.Add(new RecursoTecnologico(1, listaTipos[2], ModeloMarcaDao.Instancia().ObtenerListaModelos()[0], disponible, listasTurnoParaRecursos[0]));
             todosRecursos.Add(new RecursoTecnologico(2, listaTipos[1], ModeloMarcaDao.Instancia().ObtenerListaModelos()[4], inicioMantenimiento, listasTurnoParaRecursos[1]));
