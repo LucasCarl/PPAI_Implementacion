@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PPAI_Implementacion.ObtencionDatos;
 
 namespace PPAI_Implementacion.Clases
 {
@@ -14,7 +15,7 @@ namespace PPAI_Implementacion.Clases
 
         public PersonalCientifico ObtenerCientifico()
         {
-            return new PersonalCientifico("a@utn.frc.edu.ar", "351836452", new Usuario());
+            return PersonalCientificoDao.Instancia().ObtenerCientifico(this);
         }
     }
 }

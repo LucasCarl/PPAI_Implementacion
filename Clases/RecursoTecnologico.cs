@@ -54,7 +54,7 @@ namespace PPAI_Implementacion.Clases
             string[] datos = new string[5];     //0: NroInventario, 1: CentroInvest, 2: Modelo, 3: Marca, 4: Estado
             datos[0] = GetNumeroRT().ToString();
             datos[4] = cambioEstadoRT[cambioEstadoRT.Count-1].MostrarEstado();
-            datos[1] = ObtenerCI();
+            datos[1] = ObtenerCI().GetNombre();
             string[] marcaModelo = MostrarMarcaYModelo();   //0: Modelo, 1: Marca
             datos[2] = marcaModelo[0];
             datos[3] = marcaModelo[1];
@@ -67,9 +67,9 @@ namespace PPAI_Implementacion.Clases
             return numeroRT;
         }
 
-        public string ObtenerCI()
+        public CentroDeInvestigacion ObtenerCI()
         {
-            return CentroInvestigacionDao.Instancia().ObtenerCIDeRecurso(this).GetNombre();
+            return CentroInvestigacionDao.Instancia().ObtenerCIDeRecurso(this);
         }
 
         public string[] MostrarMarcaYModelo()
@@ -77,9 +77,9 @@ namespace PPAI_Implementacion.Clases
             return modeloDelRT.MostrarModelo();
         }
 
-        public bool EsCientificoDelCI()
+        public bool EsCientificoDelCI(PersonalCientifico cientifico)
         {
-            return true;
+            return ObtenerCI().EsCientificoActivo(cientifico);
         }
 
         public void MostrarTurnos()

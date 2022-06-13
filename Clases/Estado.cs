@@ -45,7 +45,7 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsReservado()
         {
-            return true;
+            return nombre == "Reservado";
         }
 
     }

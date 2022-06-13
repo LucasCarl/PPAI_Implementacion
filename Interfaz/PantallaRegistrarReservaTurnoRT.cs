@@ -97,6 +97,7 @@ namespace PPAI_Implementacion.Interfaz
 
         public void SolicitarSeleccionTurno(List<string[]> listaTurno)
         {
+            cldDiasTurnos.BackColor = Color.White;
             cldDiasTurnos.Enabled = true;
             dgvHorasTurnos.Enabled = true;
             btnTurno.Enabled = true;
@@ -104,11 +105,19 @@ namespace PPAI_Implementacion.Interfaz
 
         private void TomarSeleccionTurno(object sender, EventArgs e)
         {
+            //Mensaje informacion que no eligio nada
             if (dgvHorasTurnos.CurrentRow == null)
             {
                 MensajeNadaSeleccionado("Seleccione un Turno.");
                 return;
             }
+            //Mensaje informacion que el turno elegido no esta disponible para reservar
+            if ((string)dgvHorasTurnos.CurrentRow.Cells[1].Value != "Disponible")
+            {
+                MensajeNadaSeleccionado("El turno seleccionado no esta disponible para ser reservado.");
+                return;
+            }
+
             gestorTurnos.TomarSeleccionTurno(dgvHorasTurnos.CurrentRow.Index);
         }
 
@@ -137,7 +146,7 @@ namespace PPAI_Implementacion.Interfaz
                 MensajeNadaSeleccionado("Seleccione al menos un método de notificacion.");
                 return;
             }
-            gestorTurnos.TomarConfirmacionReservaRT();
+            gestorTurnos.TomarConfirmacionReservaRT(cbxEmail.Checked, cbxWhatsapp.Checked);
         }
 
         private void CancelarReservaTurno(object sender, EventArgs e)

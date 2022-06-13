@@ -22,23 +22,21 @@ namespace PPAI_Implementacion.Gestor
 
         private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
         private RecursoTecnologicoDao recursoTecnologicoDao;
-        private TurnoDao turnoDao;
         private EstadoDao estadoDao;
-        private CentroInvestigacionDao centroDao;
 
         public GestorRegistrarReservaTurnoRT(PantallaRegistrarReservaTurnoRT pantalla)
         {
             pantallaReserva = pantalla;
             tipoRecursoTecnologicoDao = TipoRecursoTecnologicoDao.Instancia();
             recursoTecnologicoDao = RecursoTecnologicoDao.Instancia();
-            turnoDao = TurnoDao.Instancia();
             estadoDao = EstadoDao.Instancia();
-            centroDao = CentroInvestigacionDao.Instancia();
         }
 
         public void RegistrarReservaTurnoRT()
         {
+            //Obtiene Lista con los tipos de recurso
             List<string> listaRecursos = BuscarTiposRT();
+            //Añade la opcion de TODOS al inicio
             listaRecursos.Insert(0, "TODOS");
             pantallaReserva.SolicitarSeleccionTipoRT(listaRecursos);
         }
@@ -85,7 +83,7 @@ namespace PPAI_Implementacion.Gestor
         public void OrdenarYAgruparRTPorCI(List<string[]> listaDatos)
         {
             listaDatos.Sort((x, y) => x[1].CompareTo(y[1]));
-            listaRecursos.Sort((x, y) => x.ObtenerCI().CompareTo(y.ObtenerCI()));
+            listaRecursos.Sort((x, y) => x.ObtenerCI().GetNombre().CompareTo(y.ObtenerCI().GetNombre()));
         }
 
         public void TomarSeleccionRT(int indexSeleccionado)
@@ -96,7 +94,7 @@ namespace PPAI_Implementacion.Gestor
 
         public PersonalCientifico ObtenerCientificoLogueado()
         {
-            return new PersonalCientifico("a@utn.frc.edu.ar", "351836452", new Usuario());
+            return UsuarioDao.Instancia().GetSesionActual().ObtenerCientificoLogueado();
         }
 
         public void ObtenerTurnosReservablesRTSeleccionado()
@@ -106,8 +104,9 @@ namespace PPAI_Implementacion.Gestor
             bool mismoCientro = ValidarPertenenciaCI(cientificoLogueado);  //Cambio EN secuencia, estos 2 metodos dsp de obtenerTurnosReservables
             DateTime hoy = ObtenerFechaHoraActual();
             AgruparYOrdenarTurnos();
-            
-            pantallaReserva.SolicitarSeleccionTurno(DeterminarDisponibilidadPorFecha(hoy));
+
+            List<string[]> turnosFecha = DeterminarDisponibilidadPorFecha(hoy);
+            pantallaReserva.SolicitarSeleccionTurno(turnosFecha);
         }
 
         public DateTime ObtenerFechaHoraActual()
@@ -117,7 +116,7 @@ namespace PPAI_Implementacion.Gestor
 
         public bool ValidarPertenenciaCI(PersonalCientifico cientifico)
         {
-            return true;
+            return recursoSeleccionado.EsCientificoDelCI(cientifico);
         }
 
         public void AgruparYOrdenarTurnos()
@@ -143,35 +142,61 @@ namespace PPAI_Implementacion.Gestor
             pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), recursoSeleccionado.GetTipo().GetNombre(), turnoSeleccionado.MostrarTurno());
         }
 
-        public void TomarConfirmacionReservaRT()
+        public void TomarConfirmacionReservaRT(bool mail, bool wsp)
         {
-            GenerarReservaRTSeleccionado();
+            GenerarReservaRTSeleccionado(mail, wsp);
         }
 
-        public void GenerarReservaRTSeleccionado()
+        public void GenerarReservaRTSeleccionado(bool mail, bool wsp)
         {
             //Poner turno en reservado
             Estado estadoReservado = ObtenerEstadoReservado();
             //recursoSeleccionado.RegistrarReservaTurno();  Al pedo ir al recurso si ya tengo el turno
             turnoSeleccionado.ReservarTurno(estadoReservado);
-            cientificoLogueado.ObtenerCI().AsignarTurno();
+            recursoSeleccionado.ObtenerCI().AsignarTurno(cientificoLogueado, turnoSeleccionado);
 
 
             //Notificar a cientifico
             string emailCientifico = ObtenerMailCientifico();
-            GenerarMail();
+            if(mail)
+                GenerarMail(cientificoLogueado.ObtenerMail());
+
+            if (wsp)
+                GenerarWhatsapp(cientificoLogueado.ObtenerTelefono());
 
             FinCU();
         }
 
-        public void GenerarMail()
+        public void GenerarMail(string email)
         {
-            //GenerarNotificacionMail
+            new InterfazMailReserva().EnviarNotificacionMail(email);
+        }
+
+        public void GenerarWhatsapp(string telefono)
+        {
+            new InterfazWhatsappReserva().EnviarNotificacionWhatsapp(telefono);
         }
 
         public Estado ObtenerEstadoReservado()
         {
-            return null;
+            List<Estado> estados = estadoDao.GetEstados();
+            List<Estado> estadosAmbitoTurno = new List<Estado>();
+            Estado reservado = null;
+            foreach (Estado estado in estados)
+            {
+                if (estado.EsAmbitoTurno())
+                    estadosAmbitoTurno.Add(estado);
+            }
+
+            foreach (Estado estado in estadosAmbitoTurno)
+            {
+                if(estado.EsReservado())
+                {
+                    reservado = estado;
+                    break;
+                }
+            }
+            return reservado;
         }
 
         public string ObtenerMailCientifico()

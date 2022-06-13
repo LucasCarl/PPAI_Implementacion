@@ -42,7 +42,7 @@ namespace PPAI_Implementacion.Clases
         {
             ultimoCambio.SetFechaHoraHasta(DateTime.Now);
             CambioEstadoTurno nuevoCambio = new CambioEstadoTurno(DateTime.Now, estado);
-            ultimoCambio = nuevoCambio;
+            cambioEstadoTurno.Add(nuevoCambio);
         }
 
         public DateTime GetFechaInicio()

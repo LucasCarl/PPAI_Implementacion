@@ -230,7 +230,7 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // cldDiasTurnos
             // 
-            this.cldDiasTurnos.BackColor = System.Drawing.SystemColors.Window;
+            this.cldDiasTurnos.BackColor = System.Drawing.SystemColors.GrayText;
             this.cldDiasTurnos.Enabled = false;
             this.cldDiasTurnos.Location = new System.Drawing.Point(9, 22);
             this.cldDiasTurnos.MaxSelectionCount = 1;

@@ -17,11 +17,12 @@ namespace PPAI_Implementacion.Clases
         {
             fechaDesde = desde;
             personalCientifico = cientifico;
+            turnos = new List<Turno>();
         }
 
         public bool EsCientificoActivo()
         {
-            return true;
+            return fechaHasta != null;
         }
 
         public void SetTurno(Turno turnoNuevo)

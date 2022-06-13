@@ -9,7 +9,6 @@ namespace PPAI_Implementacion.Clases
     class CentroDeInvestigacion
     {
         public string nombre;
-        /*
         public string sigla;
         public string direccion;
         public string edificio;
@@ -17,17 +16,16 @@ namespace PPAI_Implementacion.Clases
         public string coordenadas;
         public string telefonosContacto;
         public string correoElectronico;
-        */
         public DateTime fechaAlta;
         public int tiempoAntelacionReserva;
         public DateTime fechaBaja;
         public List<AsignacionCientificoDelCI> cientificos;
         public List<RecursoTecnologico> recursosTecnologicos;
 
-        public CentroDeInvestigacion(string nom, int minsAntelacion, List<AsignacionCientificoDelCI> listaCientificos, List<RecursoTecnologico> listaRecursos)
+        public CentroDeInvestigacion(string nom, int hrsAntelacion, List<AsignacionCientificoDelCI> listaCientificos, List<RecursoTecnologico> listaRecursos)
         {
             nombre = nom;
-            tiempoAntelacionReserva = minsAntelacion;
+            tiempoAntelacionReserva = hrsAntelacion;
             cientificos = listaCientificos;
             recursosTecnologicos = listaRecursos;
         }
@@ -44,12 +42,28 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsCientificoActivo(PersonalCientifico cientifico)
         {
-            return true;
+            bool activo = false;
+            foreach (AsignacionCientificoDelCI asignacion in cientificos)
+            {
+                if (asignacion.EsCientificoActivo())
+                {
+                    activo = true;
+                    break;
+                }
+            }
+            return activo;
         }
 
-        public void AsignarTurno()
+        public void AsignarTurno(PersonalCientifico cientifico, Turno turno)
         {
-
+            foreach (AsignacionCientificoDelCI asignacion in cientificos)
+            {
+                if(asignacion.EsCientificoActivo() && asignacion.EsCientifico(cientifico))
+                {
+                    asignacion.SetTurno(turno);
+                    break;
+                }
+            }
         }
 
         public List<RecursoTecnologico> GetRecursos()

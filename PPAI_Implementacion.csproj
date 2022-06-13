@@ -61,6 +61,8 @@
     <Compile Include="Clases\Turno.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Gestor\GestorRegistrarReservaTurnoRT.cs" />
+    <Compile Include="Interfaz\InterfazMailReserva.cs" />
+    <Compile Include="Interfaz\InterfazWhatsappReserva.cs" />
     <Compile Include="Interfaz\MenuInicial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +81,8 @@
     <Compile Include="ObtencionDatos\RecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TipoRecursoTecnologicoDao.cs" />
     <Compile Include="ObtencionDatos\TurnoDao.cs" />
+    <Compile Include="ObtencionDatos\PersonalCientificoDao.cs" />
+    <Compile Include="ObtencionDatos\UsuarioDao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\MenuInicial.resx">

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PPAI_Implementacion.ObtencionDatos;
 
 namespace PPAI_Implementacion.Interfaz
 {
@@ -15,6 +16,7 @@ namespace PPAI_Implementacion.Interfaz
         public MenuInicial()
         {
             InitializeComponent();
+            UsuarioDao.Instancia().SetSesionActual(new Clases.Sesion(UsuarioDao.Instancia().GetUsuarios()[0]));
         }
 
         private void button1_Click(object sender, EventArgs e)
