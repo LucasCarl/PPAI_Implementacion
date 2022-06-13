@@ -33,5 +33,10 @@ namespace PPAI_Implementacion.Clases
         {
             return personalCientifico.ObtenerMail();
         }
+
+        public bool EsCientifico(PersonalCientifico cientifico)
+        {
+            return cientifico == personalCientifico;
+        }
     }
 }

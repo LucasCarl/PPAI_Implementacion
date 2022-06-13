@@ -155,7 +155,27 @@ namespace PPAI_Implementacion.Interfaz
                 dgvHorasTurnos.Rows[i].Cells[0].Value = horario;
                 dgvHorasTurnos.Rows[i].Cells[1].Value = datosTurnos[i][2];
 
-                //Agregar cambio color turno estado
+                //Cambio color turno estado
+                Color colorEstado = new Color();
+                switch (datosTurnos[i][2])
+                {
+                    case "Disponible":
+                        colorEstado = Color.Blue;
+                        break;
+
+                    case "Pendiente Confirmacion":
+                        colorEstado = Color.DarkGray;
+                        break;
+
+                    case "Reservado":
+                        colorEstado = Color.Firebrick;
+                        break;
+
+                    default:
+                        colorEstado = Color.White;
+                        break;
+                }
+                dgvHorasTurnos.Rows[i].Cells[1].Style.BackColor = colorEstado;
             }
         }
 

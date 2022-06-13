@@ -56,5 +56,10 @@ namespace PPAI_Implementacion.Clases
         {
             return recursosTecnologicos;
         }
+
+        public List<AsignacionCientificoDelCI> GetCientificos()
+        {
+            return cientificos;
+        }
     }
 }

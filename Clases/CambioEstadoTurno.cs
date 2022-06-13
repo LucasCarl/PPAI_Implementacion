@@ -23,9 +23,9 @@ namespace PPAI_Implementacion.Clases
             return true;
         }
 
-        public void MostrarEstado()
+        public string MostrarEstado()
         {
-
+            return estado.MostrarEstado();
         }
 
         public void SetFechaHoraHasta(DateTime hora)

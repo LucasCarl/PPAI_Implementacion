@@ -45,5 +45,24 @@ namespace PPAI_Implementacion.ObtencionDatos
             return result;
         }
 
+        public CentroDeInvestigacion ObtenerCIDeCientifico(PersonalCientifico cientifico)
+        {
+            CentroDeInvestigacion result = null;
+            foreach (CentroDeInvestigacion centro in listaCentros)
+            {
+                foreach (AsignacionCientificoDelCI asignacion in centro.GetCientificos())
+                {
+                    if(asignacion.EsCientificoActivo() && asignacion.EsCientifico(cientifico))
+                    {
+                        result = centro;
+                        break;
+                    }
+                }
+                if (result != null)
+                    break;
+            }
+
+            return result;
+        }
     }
 }

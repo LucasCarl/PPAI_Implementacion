@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PPAI_Implementacion.ObtencionDatos;
 
 namespace PPAI_Implementacion.Clases
 {
@@ -32,6 +33,11 @@ namespace PPAI_Implementacion.Clases
         public string ObtenerTelefono()
         {
             return telefonoCelular;
+        }
+
+        public CentroDeInvestigacion ObtenerCI()
+        {
+            return CentroInvestigacionDao.Instancia().ObtenerCIDeCientifico(this);
         }
     }
 }

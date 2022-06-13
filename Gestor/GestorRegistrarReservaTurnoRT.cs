@@ -150,9 +150,17 @@ namespace PPAI_Implementacion.Gestor
 
         public void GenerarReservaRTSeleccionado()
         {
+            //Poner turno en reservado
             Estado estadoReservado = ObtenerEstadoReservado();
+            //recursoSeleccionado.RegistrarReservaTurno();  Al pedo ir al recurso si ya tengo el turno
+            turnoSeleccionado.ReservarTurno(estadoReservado);
+            cientificoLogueado.ObtenerCI().AsignarTurno();
+
+
+            //Notificar a cientifico
             string emailCientifico = ObtenerMailCientifico();
             GenerarMail();
+
             FinCU();
         }
 

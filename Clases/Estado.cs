@@ -33,9 +33,9 @@ namespace PPAI_Implementacion.Clases
             return esReservable;
         }
 
-        public void MostrarEstado()
+        public string MostrarEstado()
         {
-
+            return GetNombre();
         }
 
         public bool EsAmbitoTurno()
