@@ -44,6 +44,8 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxTurno = new System.Windows.Forms.GroupBox();
             this.btnTurno = new System.Windows.Forms.Button();
             this.dgvHorasTurnos = new System.Windows.Forms.DataGridView();
+            this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cldDiasTurnos = new System.Windows.Forms.MonthCalendar();
             this.gbxConfirmacion = new System.Windows.Forms.GroupBox();
             this.btnCancelarReserva = new System.Windows.Forms.Button();
@@ -67,8 +69,6 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxNotificacion = new System.Windows.Forms.GroupBox();
             this.cbxWhatsapp = new System.Windows.Forms.CheckBox();
             this.cbxEmail = new System.Windows.Forms.CheckBox();
-            this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbxTipoRecurso.SuspendLayout();
             this.gbxRecurso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
@@ -143,6 +143,8 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // dgvRecursos
             // 
+            this.dgvRecursos.AllowUserToAddRows = false;
+            this.dgvRecursos.AllowUserToDeleteRows = false;
             this.dgvRecursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRecursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NroInventario,
@@ -152,7 +154,9 @@ namespace PPAI_Implementacion.Interfaz
             this.Estado});
             this.dgvRecursos.Enabled = false;
             this.dgvRecursos.Location = new System.Drawing.Point(8, 19);
+            this.dgvRecursos.MultiSelect = false;
             this.dgvRecursos.Name = "dgvRecursos";
+            this.dgvRecursos.ReadOnly = true;
             this.dgvRecursos.RowHeadersWidth = 20;
             this.dgvRecursos.Size = new System.Drawing.Size(543, 150);
             this.dgvRecursos.TabIndex = 0;
@@ -161,26 +165,31 @@ namespace PPAI_Implementacion.Interfaz
             // 
             this.NroInventario.HeaderText = "Nro Inventario";
             this.NroInventario.Name = "NroInventario";
+            this.NroInventario.ReadOnly = true;
             // 
             // CentroInvestigacion
             // 
             this.CentroInvestigacion.HeaderText = "Centro Investigacion";
             this.CentroInvestigacion.Name = "CentroInvestigacion";
+            this.CentroInvestigacion.ReadOnly = true;
             // 
             // Modelo
             // 
             this.Modelo.HeaderText = "Modelo";
             this.Modelo.Name = "Modelo";
+            this.Modelo.ReadOnly = true;
             // 
             // Marca
             // 
             this.Marca.HeaderText = "Marca";
             this.Marca.Name = "Marca";
+            this.Marca.ReadOnly = true;
             // 
             // Estado
             // 
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // gbxTurno
             // 
@@ -207,16 +216,32 @@ namespace PPAI_Implementacion.Interfaz
             // 
             // dgvHorasTurnos
             // 
+            this.dgvHorasTurnos.AllowUserToAddRows = false;
+            this.dgvHorasTurnos.AllowUserToDeleteRows = false;
             this.dgvHorasTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHorasTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Horario,
             this.EstadoTurno});
             this.dgvHorasTurnos.Enabled = false;
             this.dgvHorasTurnos.Location = new System.Drawing.Point(278, 22);
+            this.dgvHorasTurnos.MultiSelect = false;
             this.dgvHorasTurnos.Name = "dgvHorasTurnos";
+            this.dgvHorasTurnos.ReadOnly = true;
             this.dgvHorasTurnos.RowHeadersWidth = 20;
             this.dgvHorasTurnos.Size = new System.Drawing.Size(273, 132);
             this.dgvHorasTurnos.TabIndex = 1;
+            // 
+            // Horario
+            // 
+            this.Horario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Horario.HeaderText = "Horario";
+            this.Horario.Name = "Horario";
+            this.Horario.Width = 66;
+            // 
+            // EstadoTurno
+            // 
+            this.EstadoTurno.HeaderText = "Estado";
+            this.EstadoTurno.Name = "EstadoTurno";
             // 
             // cldDiasTurnos
             // 
@@ -308,9 +333,9 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosHoraTurno.AutoSize = true;
             this.lblDatosHoraTurno.Location = new System.Drawing.Point(14, 236);
             this.lblDatosHoraTurno.Name = "lblDatosHoraTurno";
-            this.lblDatosHoraTurno.Size = new System.Drawing.Size(61, 13);
+            this.lblDatosHoraTurno.Size = new System.Drawing.Size(80, 13);
             this.lblDatosHoraTurno.TabIndex = 15;
-            this.lblDatosHoraTurno.Text = "Hora Turno";
+            this.lblDatosHoraTurno.Text = "Fecha Hora Fin";
             // 
             // txtFechaTurno
             // 
@@ -325,9 +350,9 @@ namespace PPAI_Implementacion.Interfaz
             this.lblDatosFechaTurno.AutoSize = true;
             this.lblDatosFechaTurno.Location = new System.Drawing.Point(14, 210);
             this.lblDatosFechaTurno.Name = "lblDatosFechaTurno";
-            this.lblDatosFechaTurno.Size = new System.Drawing.Size(68, 13);
+            this.lblDatosFechaTurno.Size = new System.Drawing.Size(91, 13);
             this.lblDatosFechaTurno.TabIndex = 13;
-            this.lblDatosFechaTurno.Text = "Fecha Turno";
+            this.lblDatosFechaTurno.Text = "Fecha Hora Inicio";
             // 
             // txtModelo
             // 
@@ -446,18 +471,6 @@ namespace PPAI_Implementacion.Interfaz
             this.cbxEmail.TabIndex = 0;
             this.cbxEmail.Text = "E-Mail";
             this.cbxEmail.UseVisualStyleBackColor = true;
-            // 
-            // Horario
-            // 
-            this.Horario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Horario.HeaderText = "Horario";
-            this.Horario.Name = "Horario";
-            this.Horario.Width = 66;
-            // 
-            // EstadoTurno
-            // 
-            this.EstadoTurno.HeaderText = "Estado";
-            this.EstadoTurno.Name = "EstadoTurno";
             // 
             // PantallaRegistrarReservaTurnoRT
             // 

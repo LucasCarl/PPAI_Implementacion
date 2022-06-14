@@ -29,8 +29,8 @@ namespace PPAI_Implementacion.ObtencionDatos
                 listaTurnos.Add(new Turno(new DateTime(2022, 6, 9 + i, 23, 0, 0), new DateTime(2022, 6, 10 + i, 1, 0, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
                 listaTurnos.Add(new Turno(new DateTime(2022, 6, 10 + i, 1, 30, 0), new DateTime(2022, 6, 10 + i, 3, 30, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
                 listaTurnos.Add(new Turno(new DateTime(2022, 6, 10 + i, 4, 0, 0), new DateTime(2022, 6, 10 + i, 6, 0, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
-            //Rec4                                              i                                       i
-            listaTurnos.Add(new Turno(new DateTime(2022, 6, 9 + i, 16, 0, 0), new DateTime(2022, 6, 9 + i, 17, 30, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
+                //Rec4                                              i                                       i
+                listaTurnos.Add(new Turno(new DateTime(2022, 6, 9 + i, 16, 0, 0), new DateTime(2022, 6, 9 + i, 17, 30, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
                 listaTurnos.Add(new Turno(new DateTime(2022, 6, 9 + i, 18, 0, 0), new DateTime(2022, 6, 9 + i, 19, 30, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[3]) }));
                 listaTurnos.Add(new Turno(new DateTime(2022, 6, 9 + i, 20, 0, 0), new DateTime(2022, 6, 9 + i, 21, 30, 0), new List<CambioEstadoTurno>() { new CambioEstadoTurno(DateTime.Now.AddDays(-21), EstadoDao.Instancia().GetEstados()[4]) }));
                 //Rec5                                              i                                       i
