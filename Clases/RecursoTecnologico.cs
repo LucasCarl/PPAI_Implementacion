@@ -36,24 +36,14 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsActivo()
         {
-            CambioEstadoRT ultimo = null;
-            foreach (CambioEstadoRT cambio in cambioEstadoRT)
-            {
-                if (cambio.EsActual())
-                {
-                    ultimo = cambio;
-                    break;
-                }
-            }
-
-            return ultimo.EsReservable();
+            return UltimoCambioEstado().EsReservable();
         }
 
         public string[] MostrarDatosRT()
         {
             string[] datos = new string[5];     //0: NroInventario, 1: CentroInvest, 2: Modelo, 3: Marca, 4: Estado
             datos[0] = GetNumeroRT().ToString();
-            datos[4] = cambioEstadoRT[cambioEstadoRT.Count-1].MostrarEstado();
+            datos[4] = UltimoCambioEstado().MostrarEstado();
             datos[1] = ObtenerCI().GetNombre();
             string[] marcaModelo = MostrarMarcaYModelo();   //0: Modelo, 1: Marca
             datos[2] = marcaModelo[0];
@@ -82,14 +72,25 @@ namespace PPAI_Implementacion.Clases
             return ObtenerCI().EsCientificoActivo(cientifico);
         }
 
-        public void MostrarTurnos()
+        public List<Tuple<Turno, string[]>> MostrarTurnos(DateTime fechaActual)
         {
+            List<Tuple<Turno, string[]>> listaDatosTurnos = new List<Tuple<Turno, string[]>>();
+            foreach (Turno turno in turnos)
+            {
+                if (turno.EsPosteriorAFechaActual(fechaActual))
+                {
+                    Tuple<Turno, string[]> tuplaTurno = new Tuple<Turno, string[]>(turno, turno.MostrarTurno());
+                    listaDatosTurnos.Add(tuplaTurno);
+                }
+            }
 
+            return listaDatosTurnos;
         }
 
-        public void RegistrarReservaTurno()
+        public void RegistrarReservaTurno(Turno turnoSeleccionado, Estado estadoReservado, PersonalCientifico cientificoLogueado)
         {
-
+            turnoSeleccionado.ReservarTurno(estadoReservado);
+            ObtenerCI().AsignarTurno(cientificoLogueado, turnoSeleccionado);
         }
 
         public List<Turno> GetTurnos()
@@ -100,6 +101,22 @@ namespace PPAI_Implementacion.Clases
         public TipoRecursoTecnologico GetTipo()
         {
             return tipoRecurso;
+        }
+
+        public CambioEstadoRT UltimoCambioEstado()
+        {
+            CambioEstadoRT ultimo = null;
+
+            foreach (CambioEstadoRT cambio in cambioEstadoRT)
+            {
+                if (cambio.EsActual())
+                {
+                    ultimo = cambio;
+                    break;
+                }
+            }
+
+            return ultimo;
         }
     }
 }

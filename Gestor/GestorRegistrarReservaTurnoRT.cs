@@ -12,13 +12,17 @@ namespace PPAI_Implementacion.Gestor
     class GestorRegistrarReservaTurnoRT
     {
         private PantallaRegistrarReservaTurnoRT pantallaReserva;
-        private TipoRecursoTecnologico tipoSelect;
+        private TipoRecursoTecnologico tipoRTSeleccionado;
         private List<RecursoTecnologico> listaRecursos;
-        private RecursoTecnologico recursoSeleccionado;
+        private RecursoTecnologico rtSeleccionado;
+        private List<Tuple<Turno, string[]>> listaTurnosPosibles;
+        private List<Tuple<Turno, string[]>> listaTurnosFecha;
         private List<Turno> listaTurnos;
-        private List<Turno> listaTurnosFecha;
         private Turno turnoSeleccionado;
         private PersonalCientifico cientificoLogueado;
+        private string mail;
+        private DateTime fechaHoraActual;
+        private bool confirmacionReserva;
 
         private TipoRecursoTecnologicoDao tipoRecursoTecnologicoDao;
         private RecursoTecnologicoDao recursoTecnologicoDao;
@@ -35,10 +39,10 @@ namespace PPAI_Implementacion.Gestor
         public void RegistrarReservaTurnoRT()
         {
             //Obtiene Lista con los tipos de recurso
-            List<string> listaRecursos = BuscarTiposRT();
+            List<string> listaTiposRT = BuscarTiposRT();
             //Añade la opcion de TODOS al inicio
-            listaRecursos.Insert(0, "TODOS");
-            pantallaReserva.SolicitarSeleccionTipoRT(listaRecursos);
+            listaTiposRT.Insert(0, "TODOS");
+            pantallaReserva.SolicitarSeleccionTipoRT(listaTiposRT);
         }
 
         public List<string> BuscarTiposRT()
@@ -55,7 +59,7 @@ namespace PPAI_Implementacion.Gestor
 
         public void TomarSeleccionTipoRT(string seleccionado)
         {
-            tipoSelect = TipoRecursoTecnologicoDao.Instancia().ObtenerTipoRecurso(seleccionado);
+            tipoRTSeleccionado = TipoRecursoTecnologicoDao.Instancia().ObtenerTipoRecurso(seleccionado);
             ObtenerRTActivoYDelTipo();
         }
 
@@ -64,20 +68,20 @@ namespace PPAI_Implementacion.Gestor
             //Obtener todos los recursos
             List<RecursoTecnologico> listaTodosRecursos = recursoTecnologicoDao.ObtenerRecursos();
             listaRecursos = new List<RecursoTecnologico>();
-            List<string[]> listaDatosRecursos = new List<string[]>();
+            List<string[]> listaRT = new List<string[]>();
 
             //Filtrar todos los recursos para obtener los activos y del tipo seleccionado
             foreach (RecursoTecnologico recurso in listaTodosRecursos)
             {
-                if(recurso.EsDeTipoRTSeleccionado(tipoSelect) && recurso.EsActivo())
+                if(recurso.EsDeTipoRTSeleccionado(tipoRTSeleccionado) && recurso.EsActivo())
                 {
                     listaRecursos.Add(recurso);
-                    listaDatosRecursos.Add(recurso.MostrarDatosRT());
+                    listaRT.Add(recurso.MostrarDatosRT());
                 }
             }
 
-            OrdenarYAgruparRTPorCI(listaDatosRecursos);
-            pantallaReserva.SolicitarSeleccionRT(listaDatosRecursos);
+            OrdenarYAgruparRTPorCI(listaRT);
+            pantallaReserva.SolicitarSeleccionRT(listaRT);
         }
 
         public void OrdenarYAgruparRTPorCI(List<string[]> listaDatos)
@@ -88,8 +92,23 @@ namespace PPAI_Implementacion.Gestor
 
         public void TomarSeleccionRT(int indexSeleccionado)
         {
-            recursoSeleccionado = listaRecursos[indexSeleccionado];
+            rtSeleccionado = listaRecursos[indexSeleccionado];
             ObtenerTurnosReservablesRTSeleccionado();
+        }
+
+        public void ObtenerTurnosReservablesRTSeleccionado()
+        {
+            List<Turno> listaTodosTurnos = rtSeleccionado.GetTurnos();
+            cientificoLogueado = ObtenerCientificoLogueado();
+            bool mismoCientro = ValidarPertenenciaCI(cientificoLogueado);
+            ObtenerFechaHoraActual();
+            //Mostrar turnos primero
+            listaTurnosPosibles = rtSeleccionado.MostrarTurnos(fechaHoraActual);
+            
+            AgruparYOrdenarTurnos();
+
+            List<string[]> listaTurnosPorDia = DeterminarDisponibilidadPorFecha(fechaHoraActual);
+            pantallaReserva.SolicitarSeleccionTurno(listaTurnosPorDia);
         }
 
         public PersonalCientifico ObtenerCientificoLogueado()
@@ -97,49 +116,39 @@ namespace PPAI_Implementacion.Gestor
             return UsuarioDao.Instancia().GetSesionActual().ObtenerCientificoLogueado();
         }
 
-        public void ObtenerTurnosReservablesRTSeleccionado()
-        {
-            listaTurnos = recursoSeleccionado.GetTurnos();
-            cientificoLogueado = ObtenerCientificoLogueado();
-            bool mismoCientro = ValidarPertenenciaCI(cientificoLogueado);  //Cambio EN secuencia, estos 2 metodos dsp de obtenerTurnosReservables
-            DateTime hoy = ObtenerFechaHoraActual();
-            AgruparYOrdenarTurnos();
-
-            List<string[]> turnosFecha = DeterminarDisponibilidadPorFecha(hoy);
-            pantallaReserva.SolicitarSeleccionTurno(turnosFecha);
-        }
-
-        public DateTime ObtenerFechaHoraActual()
-        {
-            return DateTime.Today;
-        }
-
         public bool ValidarPertenenciaCI(PersonalCientifico cientifico)
         {
-            return recursoSeleccionado.EsCientificoDelCI(cientifico);
+            return rtSeleccionado.EsCientificoDelCI(cientifico);
+        }
+
+        public void ObtenerFechaHoraActual()
+        {
+            fechaHoraActual = DateTime.Now;
         }
 
         public void AgruparYOrdenarTurnos()
         {
-            listaTurnos.Sort((x,y) => x.GetFechaInicio().CompareTo(y.GetFechaInicio()));
+            listaTurnosPosibles.Sort((x, y) => x.Item1.GetFechaInicio().CompareTo(y.Item1.GetFechaInicio()));
         }
 
+        
         public List<string[]> DeterminarDisponibilidadPorFecha(DateTime fecha)
         {
-            listaTurnosFecha = listaTurnos.FindAll(turno => turno.GetFechaInicio().Date == fecha.Date);
+            listaTurnosFecha = listaTurnosPosibles.FindAll(turno => turno.Item1.GetFechaInicio().Date == fecha.Date);
             List<string[]> datosTurnos = new List<string[]>();
-            foreach (Turno turno in listaTurnosFecha)
+            foreach (Tuple<Turno, string[]> turno in listaTurnosFecha)
             {
-                datosTurnos.Add(turno.MostrarTurno());
+                datosTurnos.Add(turno.Item2);
             }
 
             return datosTurnos;
         }
+        
 
         public void TomarSeleccionTurno(int indexSeleccionado)
         {
-            turnoSeleccionado = listaTurnosFecha[indexSeleccionado];
-            pantallaReserva.SolicitarConfirmacionReservaRT(recursoSeleccionado.MostrarDatosRT(), recursoSeleccionado.GetTipo().GetNombre(), turnoSeleccionado.MostrarTurno());
+            turnoSeleccionado = listaTurnosFecha[indexSeleccionado].Item1;
+            pantallaReserva.SolicitarConfirmacionReservaRT(rtSeleccionado.MostrarDatosRT(), rtSeleccionado.GetTipo().GetNombre(), turnoSeleccionado.MostrarTurno());
         }
 
         public void TomarConfirmacionReservaRT(bool mail, bool wsp)
@@ -147,19 +156,16 @@ namespace PPAI_Implementacion.Gestor
             GenerarReservaRTSeleccionado(mail, wsp);
         }
 
-        public void GenerarReservaRTSeleccionado(bool mail, bool wsp)
+        public void GenerarReservaRTSeleccionado(bool boolMail, bool wsp)
         {
             //Poner turno en reservado
             Estado estadoReservado = ObtenerEstadoReservado();
-            //recursoSeleccionado.RegistrarReservaTurno();  Al pedo ir al recurso si ya tengo el turno
-            turnoSeleccionado.ReservarTurno(estadoReservado);
-            recursoSeleccionado.ObtenerCI().AsignarTurno(cientificoLogueado, turnoSeleccionado);
-
+            rtSeleccionado.RegistrarReservaTurno(turnoSeleccionado, estadoReservado, cientificoLogueado);
 
             //Notificar a cientifico
-            string emailCientifico = ObtenerMailCientifico();
-            if(mail)
-                GenerarMail(cientificoLogueado.ObtenerMail());
+            mail = ObtenerMailCientifico();
+            if(boolMail)
+                GenerarMail(mail);
 
             if (wsp)
                 GenerarWhatsapp(cientificoLogueado.ObtenerTelefono());

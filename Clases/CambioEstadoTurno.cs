@@ -20,7 +20,7 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsActual()
         {
-            return true;
+            return fechaHoraHasta == DateTime.MinValue;     //Compara con minvalue porque Datetime no permite ser null, se inicializa con valor minvalue
         }
 
         public string MostrarEstado()

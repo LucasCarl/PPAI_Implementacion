@@ -14,6 +14,7 @@ namespace PPAI_Implementacion.Interfaz
     public partial class PantallaRegistrarReservaTurnoRT : Form
     {
         private Gestor.GestorRegistrarReservaTurnoRT gestorTurnos;
+        private List<Tuple<DateTime, List<string[]>>> listaTurnosPorDia;
 
         public PantallaRegistrarReservaTurnoRT()
         {
@@ -35,35 +36,36 @@ namespace PPAI_Implementacion.Interfaz
             this.Show();
         }
 
-        public void SolicitarSeleccionTipoRT(List<string> listaTipos)
+        public void SolicitarSeleccionTipoRT(List<string> listaTiposRT)
         {
             cbxTipoRecurso.Enabled = true;
             btnTipoRecurso.Enabled = true;
 
-            cbxTipoRecurso.DataSource = listaTipos;
+            cbxTipoRecurso.DataSource = listaTiposRT;
         }
+
         private void TomarSeleccionTipoRT(object sender, EventArgs e)
         {
             gestorTurnos.TomarSeleccionTipoRT((string)cbxTipoRecurso.SelectedItem);
         }
 
-        public void SolicitarSeleccionRT(List<string[]> listaDatosRecursos)
+        public void SolicitarSeleccionRT(List<string[]> listaRT)
         {
             dgvRecursos.Enabled = true;
             btnRecurso.Enabled = true;
 
-            dgvRecursos.DataSource = listaDatosRecursos;
+            dgvRecursos.DataSource = listaRT;
             
-            for (int i = 0; i < listaDatosRecursos.Count; i++)
+            for (int i = 0; i < listaRT.Count; i++)
             {
-                dgvRecursos.Rows[i].Cells[0].Value = listaDatosRecursos[i][0];
-                dgvRecursos.Rows[i].Cells[1].Value = listaDatosRecursos[i][1];
-                dgvRecursos.Rows[i].Cells[2].Value = listaDatosRecursos[i][2];
-                dgvRecursos.Rows[i].Cells[3].Value = listaDatosRecursos[i][3];
-                dgvRecursos.Rows[i].Cells[4].Value = listaDatosRecursos[i][4];
+                dgvRecursos.Rows[i].Cells[0].Value = listaRT[i][0];
+                dgvRecursos.Rows[i].Cells[1].Value = listaRT[i][1];
+                dgvRecursos.Rows[i].Cells[2].Value = listaRT[i][2];
+                dgvRecursos.Rows[i].Cells[3].Value = listaRT[i][3];
+                dgvRecursos.Rows[i].Cells[4].Value = listaRT[i][4];
 
                 Color colorEstado = new Color();
-                switch (listaDatosRecursos[i][4])
+                switch (listaRT[i][4])
                 {
                     case "Disponible":
                         colorEstado = Color.Blue;
@@ -97,6 +99,8 @@ namespace PPAI_Implementacion.Interfaz
 
         public void SolicitarSeleccionTurno(List<string[]> listaTurno)
         {
+            //listaTurnosPorDia = listaTurno;
+
             cldDiasTurnos.BackColor = Color.White;
             cldDiasTurnos.Enabled = true;
             dgvHorasTurnos.Enabled = true;
@@ -153,6 +157,7 @@ namespace PPAI_Implementacion.Interfaz
         {
             this.Close();
         }
+
 
         private void MostrarTurnosDia(object sender, DateRangeEventArgs e)
         {

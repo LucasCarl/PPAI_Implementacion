@@ -13,7 +13,6 @@ namespace PPAI_Implementacion.Clases
         private DateTime fechaHoraInicio;
         private DateTime fechaHoraFin;
         private List<CambioEstadoTurno> cambioEstadoTurno;
-        private CambioEstadoTurno ultimoCambio;
 
         public Turno(DateTime desde, DateTime hasta, List<CambioEstadoTurno> cambiosEstado)
         {
@@ -22,25 +21,24 @@ namespace PPAI_Implementacion.Clases
             cambioEstadoTurno = cambiosEstado;
         }
 
-        public bool EsPosteriorAFechaActual()
+        public bool EsPosteriorAFechaActual(DateTime fechaActual)
         {
-            return fechaHoraInicio > DateTime.Now;
+            return fechaHoraInicio > fechaActual;
         }
 
         public string[] MostrarTurno()
         {
-            ultimoCambio = cambioEstadoTurno[cambioEstadoTurno.Count - 1];
             string[] datos = new string[3];
             datos[0] = fechaHoraInicio.ToString();
             datos[1] = fechaHoraFin.ToString();
-            datos[2] = ultimoCambio.MostrarEstado();
+            datos[2] = UltimoCambioEstado().MostrarEstado();
 
             return datos;
         }
 
         public void ReservarTurno(Estado estado)
         {
-            ultimoCambio.SetFechaHoraHasta(DateTime.Now);
+            UltimoCambioEstado().SetFechaHoraHasta(DateTime.Now);
             CambioEstadoTurno nuevoCambio = new CambioEstadoTurno(DateTime.Now, estado);
             cambioEstadoTurno.Add(nuevoCambio);
         }
@@ -48,6 +46,22 @@ namespace PPAI_Implementacion.Clases
         public DateTime GetFechaInicio()
         {
             return fechaHoraInicio;
+        }
+
+        public CambioEstadoTurno UltimoCambioEstado()
+        {
+            CambioEstadoTurno ultimo = null;
+
+            foreach (CambioEstadoTurno cambio in cambioEstadoTurno)
+            {
+                if (cambio.EsActual())
+                {
+                    ultimo = cambio;
+                    break;
+                }
+            }
+
+            return ultimo;
         }
     }
 }

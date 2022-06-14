@@ -22,7 +22,7 @@ namespace PPAI_Implementacion.Clases
 
         public bool EsCientificoActivo()
         {
-            return fechaHasta != null;
+            return fechaHasta == null;
         }
 
         public void SetTurno(Turno turnoNuevo)
