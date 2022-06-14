@@ -100,10 +100,10 @@ namespace PPAI_Implementacion.Gestor
         {
             List<Turno> listaTodosTurnos = rtSeleccionado.GetTurnos();
             cientificoLogueado = ObtenerCientificoLogueado();
-            bool mismoCientro = ValidarPertenenciaCI(cientificoLogueado);
+            int hrsAntelacion = ValidarPertenenciaCI(cientificoLogueado);
             ObtenerFechaHoraActual();
             //Mostrar turnos primero
-            listaTurnosPosibles = rtSeleccionado.MostrarTurnos(fechaHoraActual);
+            listaTurnosPosibles = rtSeleccionado.MostrarTurnos(fechaHoraActual.AddHours(hrsAntelacion));
             
             AgruparYOrdenarTurnos();
 
@@ -116,7 +116,7 @@ namespace PPAI_Implementacion.Gestor
             return UsuarioDao.Instancia().GetSesionActual().ObtenerCientificoLogueado();
         }
 
-        public bool ValidarPertenenciaCI(PersonalCientifico cientifico)
+        public int ValidarPertenenciaCI(PersonalCientifico cientifico)
         {
             return rtSeleccionado.EsCientificoDelCI(cientifico);
         }

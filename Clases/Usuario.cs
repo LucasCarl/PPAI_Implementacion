@@ -13,6 +13,11 @@ namespace PPAI_Implementacion.Clases
         private string nombreUsuario;
         private bool habilitado;
 
+        public Usuario(string usu)
+        {
+            nombreUsuario = usu;
+        }
+
         public PersonalCientifico ObtenerCientifico()
         {
             return PersonalCientificoDao.Instancia().ObtenerCientifico(this);

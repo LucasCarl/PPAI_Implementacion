@@ -16,9 +16,9 @@ namespace PPAI_Implementacion.ObtencionDatos
         public UsuarioDao()
         {
             listaUsuario = new List<Usuario>();
-            listaUsuario.Add(new Usuario());
-            listaUsuario.Add(new Usuario());
-            listaUsuario.Add(new Usuario());
+            listaUsuario.Add(new Usuario("UTN78755"));
+            listaUsuario.Add(new Usuario("Observ5874"));
+            listaUsuario.Add(new Usuario("Quim69744"));
         }
 
         public static UsuarioDao Instancia()

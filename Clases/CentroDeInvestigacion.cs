@@ -40,18 +40,18 @@ namespace PPAI_Implementacion.Clases
             return GetNombre();
         }
 
-        public bool EsCientificoActivo(PersonalCientifico cientifico)
+        public int EsCientificoActivo(PersonalCientifico cientifico)
         {
-            bool activo = false;
+            int tiempoAntelacion = tiempoAntelacionReserva;
             foreach (AsignacionCientificoDelCI asignacion in cientificos)
             {
                 if (asignacion.EsCientificoActivo())
                 {
-                    activo = true;
+                    tiempoAntelacion = 0;
                     break;
                 }
             }
-            return activo;
+            return tiempoAntelacion;
         }
 
         public void AsignarTurno(PersonalCientifico cientifico, Turno turno)

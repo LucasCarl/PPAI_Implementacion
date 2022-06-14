@@ -67,7 +67,7 @@ namespace PPAI_Implementacion.Clases
             return modeloDelRT.MostrarModelo();
         }
 
-        public bool EsCientificoDelCI(PersonalCientifico cientifico)
+        public int EsCientificoDelCI(PersonalCientifico cientifico)
         {
             return ObtenerCI().EsCientificoActivo(cientifico);
         }
