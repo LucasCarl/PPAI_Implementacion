@@ -44,8 +44,6 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxTurno = new System.Windows.Forms.GroupBox();
             this.btnTurno = new System.Windows.Forms.Button();
             this.dgvHorasTurnos = new System.Windows.Forms.DataGridView();
-            this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cldDiasTurnos = new System.Windows.Forms.MonthCalendar();
             this.gbxConfirmacion = new System.Windows.Forms.GroupBox();
             this.btnCancelarReserva = new System.Windows.Forms.Button();
@@ -69,6 +67,8 @@ namespace PPAI_Implementacion.Interfaz
             this.gbxNotificacion = new System.Windows.Forms.GroupBox();
             this.cbxWhatsapp = new System.Windows.Forms.CheckBox();
             this.cbxEmail = new System.Windows.Forms.CheckBox();
+            this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbxTipoRecurso.SuspendLayout();
             this.gbxRecurso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
@@ -215,18 +215,8 @@ namespace PPAI_Implementacion.Interfaz
             this.dgvHorasTurnos.Location = new System.Drawing.Point(278, 22);
             this.dgvHorasTurnos.Name = "dgvHorasTurnos";
             this.dgvHorasTurnos.RowHeadersWidth = 20;
-            this.dgvHorasTurnos.Size = new System.Drawing.Size(158, 162);
+            this.dgvHorasTurnos.Size = new System.Drawing.Size(273, 132);
             this.dgvHorasTurnos.TabIndex = 1;
-            // 
-            // Horario
-            // 
-            this.Horario.HeaderText = "Horario";
-            this.Horario.Name = "Horario";
-            // 
-            // EstadoTurno
-            // 
-            this.EstadoTurno.HeaderText = "Estado";
-            this.EstadoTurno.Name = "EstadoTurno";
             // 
             // cldDiasTurnos
             // 
@@ -456,6 +446,18 @@ namespace PPAI_Implementacion.Interfaz
             this.cbxEmail.TabIndex = 0;
             this.cbxEmail.Text = "E-Mail";
             this.cbxEmail.UseVisualStyleBackColor = true;
+            // 
+            // Horario
+            // 
+            this.Horario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Horario.HeaderText = "Horario";
+            this.Horario.Name = "Horario";
+            this.Horario.Width = 66;
+            // 
+            // EstadoTurno
+            // 
+            this.EstadoTurno.HeaderText = "Estado";
+            this.EstadoTurno.Name = "EstadoTurno";
             // 
             // PantallaRegistrarReservaTurnoRT
             // 
